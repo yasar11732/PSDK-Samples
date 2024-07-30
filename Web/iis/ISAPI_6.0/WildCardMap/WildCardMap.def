@@ -1,0 +1,5 @@
+LIBRARY WildCardMap
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc

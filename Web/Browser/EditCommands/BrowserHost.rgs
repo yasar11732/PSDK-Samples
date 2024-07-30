@@ -1,0 +1,24 @@
+HKCR
+{
+	EdCommands.BrowserHost.1 = s 'BrowserHost Class'
+	{
+		CLSID = s '{3B30D67E-F866-4126-8470-7D4D27CD7217}'
+	}
+	EdCommands.BrowserHost = s 'BrowserHost Class'
+	{
+		CLSID = s '{3B30D67E-F866-4126-8470-7D4D27CD7217}'
+		CurVer = s 'EdCommands.BrowserHost.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3B30D67E-F866-4126-8470-7D4D27CD7217} = s 'BrowserHost Class'
+		{
+			ProgID = s 'EdCommands.BrowserHost.1'
+			VersionIndependentProgID = s 'EdCommands.BrowserHost'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{6E8B7442-D976-4B76-A345-0F6BF91E0F9B}'
+			'TypeLib' = s '{2C7F2F94-CF6F-4C27-A86D-2C51A9EE9AAF}'
+		}
+	}
+}

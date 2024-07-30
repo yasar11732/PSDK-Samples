@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!-- 1999 American League All-Star Team Starters -->
+
+<xml>
+  <player>
+    <name>Ivan Rodriguez</name>
+    <position>C</position>
+    <team>Texas Rangers</team>
+    <votes>1897774</votes>
+  </player>
+  <player>
+    <name>Jim Thome</name>
+    <position>1B</position>
+    <team>Cleveland Indians</team>
+    <votes>1364692</votes>
+  </player>
+  <player>
+    <name>Roberto Alomar</name>
+    <position>2B</position>
+    <team>Cleveland Indians</team>
+    <votes>2793891</votes>
+  </player>
+  <player>
+    <name>Cal Ripken Jr.</name>
+    <position>3B</position>
+    <team>Baltimore Orioles</team>
+    <votes>1285728</votes>
+  </player>
+  <player>
+    <name>Nomar Garciaparra</name>
+    <position>SS</position>
+    <team>Boston Red Sox</team>
+    <votes>1089974</votes>
+  </player>
+  <player>
+    <name>Ken Griffey Jr.</name>
+    <position>OF</position>
+    <team>Seattle Mariners</team>
+    <votes>2918055</votes>
+  </player>
+  <player>
+    <name>Manny Ramirez</name>
+    <position>OF</position>
+    <team>Cleveland Indians</team>
+    <votes>1898430</votes>
+  </player>
+  <player>
+    <name>Kenny Lofton</name>
+    <position>OF</position>
+    <team>Cleveland Indians</team>
+    <votes>1676595</votes>
+  </player>
+  <player>
+    <name>Jose Canseco</name>
+    <position>DH</position>
+    <team>Tampa Bay Devilrays</team>
+    <votes>1664282</votes>
+  </player>
+</xml>

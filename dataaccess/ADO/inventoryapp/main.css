@@ -1,0 +1,24 @@
+BODY
+{
+    FONT-FAMILY: Arial
+}
+.TableRow
+{
+    COLOR: black;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 0.8em;
+    FONT-WEIGHT: 500
+}
+.HighlightedRow
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 0.8em;
+    FONT-WEIGHT: bold
+}
+.Link
+{
+    COLOR: blue;
+    CURSOR: hand;
+    TEXT-DECORATION: underline
+}

@@ -1,0 +1,14 @@
+<?xml version='1.0' ?>          
+<root xmlns:sql="urn:schemas-microsoft-com:xml-sql" sql:xsl="products.xsl" >
+    <sql:header>
+        <sql:param name="ProdName">%</sql:param>
+    </sql:header>
+    <sql:query>
+        SELECT      *
+        FROM        Products
+        WHERE       ProductName like '%' + @ProdName + '%'
+        ORDER BY    ProductName                     
+        FOR XML AUTO
+    </sql:query>
+</root> 
+

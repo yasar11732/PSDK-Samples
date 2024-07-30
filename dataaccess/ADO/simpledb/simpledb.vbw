@@ -1,0 +1,8 @@
+frmAddEmployee = 87, 52, 635, 520, , 22, 22, 676, 290, C
+basSimpleDb = 32, 100, 1068, 613, 
+frmDbLogIn = 105, 110, 1141, 552, , 110, 110, 720, 515, C
+frmSelectAction = 220, 60, 800, 607, , 88, 88, 698, 493, C
+frmEditEmployee = 334, 255, 973, 936, , 0, 0, 775, 666, C
+frmDeleteEmployee = 194, 274, 1063, 739, , 154, 154, 764, 559, C
+frmListEmployees = 309, 329, 1047, 961, C, 44, 44, 654, 449, C
+frmBrowse = 96, 396, 1019, 865, C, 66, 66, 823, 621, C

@@ -1,0 +1,19 @@
+Class Schedule
+
+Files:
+classSchedule.htm
+idSchema.xml
+refSchema.xml
+classes.xml
+
+Description:
+This sample demonstrates navigation of an XML data set representing classes and 
+students linked by ID.  Click on the student name to see which courses the student is 
+enrolled in, and click on a course name to see the details of that course.
+
+This feature shows how to merge namespaces and validate each against a different 
+XML Schema.
+
+Compatibility/Platform Compatibility:
+This demo requires Microsoft Internet Explorer 5 or greater on Win32 or Unix 
+platforms.

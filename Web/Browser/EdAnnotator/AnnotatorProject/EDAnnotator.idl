@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// EDAnnotator.idl : IDL source for EDAnnotator.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EDAnnotator.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "mshtml.idl";
+#include "olectl.h"
+    
+
+    [
+        object,
+        uuid(FB422822-6FA5-4B38-9E17-F28AFFEB6E10),
+        dual,
+        helpstring("IAnnotator Interface"),
+        pointer_default(unique)
+    ]
+    interface IAnnotator : IDispatch
+    {
+        [id(1), helpstring("method AttachAnnotator")] HRESULT AttachAnnotator(IHTMLDocument2* pDoc);
+        [id(2), helpstring("method DetachAnnotator")] HRESULT DetachAnnotator();
+        [id(3), helpstring("method ShowCommentGlyphs")] HRESULT ShowCommentGlyphs(BOOL bShow);
+		[id(4), helpstring("method AddComment")] HRESULT AddComment();
+    };
+
+[
+    uuid(2486B506-7D8E-4D43-A94B-CDF663E8F5FC),
+    version(1.0),
+    helpstring("EDAnnotator 1.0 Type Library")
+]
+library EDANNOTATORLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(9790C4C2-7BFF-49C1-9439-068EE3B8DC22),
+        helpstring("Annotator Class")
+    ]
+    coclass Annotator
+    {
+        [default] interface IAnnotator;
+    };
+};

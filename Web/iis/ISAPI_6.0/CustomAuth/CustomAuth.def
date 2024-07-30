@@ -1,0 +1,7 @@
+LIBRARY CustomAuth
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+    GetFilterVersion
+    HttpFilterProc

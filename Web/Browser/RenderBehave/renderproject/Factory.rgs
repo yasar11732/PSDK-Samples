@@ -1,0 +1,24 @@
+HKCR
+{
+	Factory.Factory.1 = s 'Factory Class'
+	{
+		CLSID = s '{CFDD0BBD-9906-11d3-953D-0000F804E031}'
+	}
+	Factory.Factory = s 'Factory Class'
+	{
+		CurVer = s 'Factory.Factory.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {CFDD0BBD-9906-11d3-953D-0000F804E031} = s 'Factory Class'
+		{
+			ProgID = s 'Factory.Factory.1'
+			VersionIndependentProgID = s 'Factory.Factory'
+
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

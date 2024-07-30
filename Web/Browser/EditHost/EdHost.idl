@@ -1,0 +1,90 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// EdHost.idl : IDL source for EdHost.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EdHost.tlb) and marshalling code.
+#define DISPID_GETHWND   500 
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(5FD6158A-71F6-4F20-B8A9-6EAF5D032D15),
+		dual,
+		helpstring("IBrowserHost Interface"),
+		pointer_default(unique)
+	]
+	interface IBrowserHost : IDispatch
+	{
+		HRESULT Run();
+		HRESULT Stop();
+		[id(DISPID_GETHWND), helpstring("method GetHWND")] HRESULT GetHwnd(long* phwnd);
+	};
+	[
+		object,
+		uuid(213DA9A8-B856-4049-BBA3-11758E902390),
+		helpstring("IGrid Interface"),
+		pointer_default(unique)
+	]
+	interface IGrid : IUnknown
+	{
+		[propget, helpstring("property GridSize")] HRESULT GridSize([out, retval] long *pVal);
+		[propput, helpstring("property GridSize")] HRESULT GridSize([in] long newVal);
+	};
+	[
+		object,
+		uuid(CCBFDE40-FE5D-4A3C-880B-47839715E3AC),
+		dual,
+		helpstring("ISnap Interface"),
+		pointer_default(unique)
+	]
+	interface ISnap : IDispatch
+	{
+		[propget, id(1), helpstring("property SnapIncrement")] HRESULT SnapIncrement([out, retval] long *pVal);
+		[propput, id(1), helpstring("property SnapIncrement")] HRESULT SnapIncrement([in] long newVal);
+		[propget, id(2), helpstring("property SnapOn")] HRESULT SnapOn([out, retval] BOOL *pVal);
+		[propput, id(2), helpstring("property SnapOn")] HRESULT SnapOn([in] BOOL newVal);
+	};
+
+[
+	uuid(77562D86-6956-4863-AA6D-2646344624EE),
+	version(1.0),
+	helpstring("EdHost 1.0 Type Library")
+]
+library EDHOSTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(2A2B21D5-F43B-4EA0-9DFA-1EFE9F9E211A),
+		helpstring("BrowserHost Class")
+	]
+	coclass BrowserHost
+	{
+		[default] interface IBrowserHost;
+	};
+
+	[
+		uuid(1429392E-A3DF-45AD-A1A3-B02836417AB1),
+		helpstring("Grid Class")
+	]
+	coclass Grid
+	{
+		[default] interface IGrid;
+	};
+	[
+		uuid(1C33EB2D-823E-4897-858B-E06D6BD3CC07),
+		helpstring("Snap Class")
+	]
+	coclass Snap
+	{
+		[default] interface ISnap;
+	};
+
+};

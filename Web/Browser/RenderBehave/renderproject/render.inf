@@ -1,0 +1,13 @@
+[Version]
+signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[Add.Code]
+render.dll=render.dll
+
+[render.dll]
+file-win32-x86=thiscab
+RegisterServer=yes
+CLSID={CFDD0BBD-9906-11d3-953D-0000F804E031}
+DestDir=
+FileVersion=1,0,0,0

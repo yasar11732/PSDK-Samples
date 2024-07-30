@@ -1,0 +1,75 @@
+<!-- 
+ File:		default.htm
+ Description:	ADO 2.7 Sample Application
+		Visual C++ Client Appliction Using ADO.
+ Copyright:	Copyright (c) 1991-2001 Microsoft Corporation
+-->
+
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>ADO 2.7 Samples</TITLE>
+
+</HEAD>
+<BODY>
+<LINK REL="STYLESHEET" HREF="..\ADOStyle.css">
+
+<H2>VC Client (a.k.a ADOVCGEN)</H2>
+
+<H3>Sample Overview</H3>
+The ADOVCGEN application uses VC++ to demonstrate:
+<UL>
+<LI>How to connect to a backend database using the data links dialog box</LI>
+<LI>How to use ADO to extract/ manipulate data and display it using the ADO Data Grid</LI>
+</UL>
+
+<H3>Setup</H3>
+Follow the instructions below to setup this sample.
+<UL>
+<LI>Compile the ADOVCGEN project to generate the ADOVCGEN.EXE.</LI>
+</UL>
+
+
+<H3>Running the Sample</H3>
+Follow the instructions below to run this sample.
+
+1. Connect to proper back-end database 
+<UL>
+<LI>Press the 'Build' button, this will bring up the 'Data Link Properties' Dialog box</LI>
+<LI>Select the provider required to connect to the back-end database. Fill the appropriate 
+entries in the Connection Tab for the Provider chosen (Refer to OLE DB Docs for details 
+on the Data Link Properties Dialog Box )</LI>
+<LI>Press the 'OK' Button, This will fill the 'Select Table' List Control and the 'Connect String' Edit Box.</LI>
+</UL>
+
+
+2. Data Retrieval
+<UL>
+<LI>Select a table from the 'Select Table' List Control by clicking on it.</LI>
+<LI>You should be able to view data in the 'Data Grid Display' data control.</LI>
+</UL>
+
+3. Data Retrieval / Manipulation
+<UL>
+<LI>Type in the SQL Statement in the 'SQL Statement' Edit Box and press the 'Xecute' button. 
+The support for SQL Statements (SELECT, INSERT, UPDATE and DELETE) is dependent on the Native 
+Provider. The ADOVCGen Tool will forward all the SQL Statements to the Provider for processing.</LI>
+<LI>You should be able to view data in the 'Data Grid Display' data control.</LI>
+</UL>
+
+4. Refreshing the Query
+<UL>
+<LI>Press the 'Refresh' Button.</LI>
+</UL>
+
+<H3>System Requirements</H3>
+This application requires the following system components to run.
+<UL>
+<LI>Microsoft Windows NT 4.0 or Windows 2000</LI>
+<LI>Microsoft Internet Information Services version 4.0 or 5.0</LI>
+<LI>Microsoft Visual C++ version 6.0 or newer</LI>
+<LI>SQL Server 7.0 or newer</LI>
+</UL>
+
+</BODY>
+</HTML>

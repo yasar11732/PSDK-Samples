@@ -1,0 +1,237 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  XML Data Source Object</TITLE>
+<STYLE>
+  H1 {color:green}
+  .directions {font-weight:bold}
+  .label {font-weight:bold;color:#800000} //maroon
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+	
+<XML id=xsldoc src="show-xml.xsl"></XML>
+<SCRIPT>
+var docArray = new Array();  //holds the document objects created when navigating
+var recordsetArray = new Array();  //holds the recordset script displayed after RecordSet:
+var xmlHereArray = new Array();  //holds the XML displayed at each step in the navigation
+var contextNumArray = new Array();  //holds the context of the current point in the tree
+var recordsetNameArray = new Array();  //holds the name of the records within the current recordset
+var docCount; //number of levels deep the user has navigated
+
+function loadData(){
+  docCount = 0;
+  xml1.async = false;
+  try {
+    
+    //clear out the current table and current XML
+    tbl1.innerHTML = "";
+    xmlHere.innerHTML = "";
+
+    //load XML from user input box
+    xml1.load(xmlURL.value);
+  
+    //clone the document and store as first member in docArray  
+    docArray[docCount] = xml1.XMLDocument.cloneNode(true);  
+
+    //set initial values
+    if (xml1.parseError.reason == ""){
+      xmlHere.innerHTML = xml1.transformNode(xsldoc.XMLDocument);
+      xmlHereArray[docCount] = xmlHere.innerHTML;
+      rsScript.innerText = "xmldso.recordset";
+      recordsetNameArray[docCount] = getRecordsetName();
+      recordsetArray[docCount] = rsScript.innerText;
+      contextNumArray[docCount] = -1;
+      docCount++;
+
+      tbl1.innerHTML = makeTable(xml1.recordset);
+    }
+    else alert("The document could not be loaded:\n" + xml1.parseError.reason);
+  }catch(e){alert(e.description); return;}
+  }
+
+//function returns the Name of the Records that make up the recordset
+function getRecordsetName(){
+  if (xml1.recordset.fields(0).name == xml1.documentElement.firstChild.nodeName)
+    return xml1.documentElement.nodeName;
+  else return xml1.documentElement.firstChild.nodeName;
+}
+
+function getNewRS(){
+  var docRoot = xml1.documentElement;
+  var eventSpan = window.event.srcElement;  //cell clicked on by user
+  var recNum = eventSpan.recordNumber-1;  //index of cell according to other cells in the same column
+  var cellNum = eventSpan.parentNode.cellIndex-1; //index of cell according to other cells in the same row
+  var fieldName = eventSpan.innerText.substring(2); //name within field minus the "*"
+  var contextNode; //node on which to base queries
+
+  //set the contextNode 
+  if (rsScript.innerText == "xmldso.recordset" && xml1.recordset.fields(0).name == xml1.documentElement.firstChild.nodeName){
+    contextNode = docRoot; }
+  else contextNode = docRoot.childNodes.item(recNum);
+
+  //querying for all nodes below contextNode that match the field name
+  var selNodes = contextNode.selectNodes(fieldName);
+
+  if (selNodes.length != 0){
+    colorTree(docRoot, eventSpan, recNum, fieldName, contextNode);
+
+    var holder = xml1.createElement("holder");
+    for (var i=0;i<selNodes.length;i++){
+      holder.appendChild(selNodes.item(i).cloneNode(true));
+      }
+    
+    //load nodes returned by query to create new table
+    xml1.loadXML(holder.xml);
+
+    docArray[docCount] = xml1.XMLDocument.cloneNode(true);
+
+    rsScript.innerText += ".fields(" + cellNum + ").value";
+
+    recordsetArray[docCount] = rsScript.innerText;
+    contextNumArray[docCount] = recNum;
+    recordsetNameArray[docCount] = fieldName;
+    docCount++;
+    tbl1.innerHTML = makeTable(xml1.recordset);
+
+    }
+  else alert("The " + fieldName + "(" + recNum + ") recordset has 0 records");
+  }
+
+//color the part of the XML displayed that corresponds to the data shown in the table
+function colorTree(docRoot, eventSpan, recNum, fieldName, contextNode){
+
+  var contextDiv;
+
+  xmlHere.innerHTML = docArray[0].transformNode(xsldoc.XMLDocument);
+    
+  if (rsScript.innerText == docRoot.nodeName){
+    contextDiv = document.all(contextNode.nodeName);
+    }
+  else {
+    var index = 0;
+    var indexNodes = docArray[0].documentElement.selectNodes(".//" + contextNode.nodeName);
+  
+    if (contextNumArray[docCount-1] > 0){  //contextNumArray[docCount-1] holds the index of the bound XML element's parent
+					   //in order to figure out the index of the bound XML element.
+      for (var q=0;q<contextNumArray[docCount-1];q++)
+        {
+          index += indexNodes.item(q).selectNodes("./" + fieldName).length;
+        }
+
+      contextDiv = document.all(contextNode.nodeName).item(recNum + index - 1);
+      }
+
+    else {
+      if (indexNodes.length > 1){
+        contextDiv = document.all(contextNode.nodeName).item(recNum);
+        }
+      else {
+        contextDiv = document.all(contextNode.nodeName);
+        }
+      }
+    }
+   for (var n=1;n<contextDiv.childNodes.length-2;n++){
+      if(contextDiv.childNodes.item(n).id == fieldName){
+        contextDiv.childNodes.item(n).style.color = "red";
+      }
+    }
+
+  xmlHereArray[docCount] = xmlHere.innerHTML;    
+  }
+
+//dynamically make the table w/ data concerning current document
+function makeTable(rsObj){
+  var counter = 0;
+  var docRoot = xml1.documentElement;
+  var firstField = rsObj.fields(0).name;
+  var tblString = "<TABLE ID=bndTbl BORDER DATASRC=#xml1><THEAD><TH><SPAN style='color:green'>RECORD</SPAN></TH>";
+  if (firstField == docRoot.firstChild.nodeName && recordsetNameArray[docCount-1] != docRoot.nodeName)
+    counter = 1;
+  for (var j=counter; j < rsObj.fields.count; j++){
+    tblString += "<TH><SPAN STYLE='color:blue'>" + rsObj.fields(j).name + "</SPAN></TH>"; 
+    }
+  tblString += "</THEAD><TR><TD><SPAN STYLE='color:red'>" + recordsetNameArray[docCount-1] + "</SPAN></TD>";
+  for (var i=counter; i < rsObj.fields.count; i++){
+    if(typeof(rsObj.fields(i).value) == "string")
+      tblString += "<TD><SPAN DATAFLD=" + rsObj.fields(i).name + "></SPAN></TD>";
+    else{
+      tblString += "<TD><SPAN STYLE='cursor:hand' onmouseover='this.style.backgroundColor = \"yellow\"' onmouseout='this.style.backgroundColor = \"white\"' onclick='getNewRS()'>* " + rsObj.fields(i).name + "</SPAN></TD>";
+      }
+    }
+  tblString += "</TR></TABLE>";
+  return tblString;
+  }
+
+//toggle the XML displayed
+function showXML(){
+  if (xmlButton.value == "Show XML"){
+    xmlHere.style.display = "block";
+    xmlButton.value = "Hide XML";
+    }
+  else {
+    xmlHere.style.display = "none";
+    xmlButton.value = "Show XML";
+    }
+  }
+
+//display the previous table
+function goBack(){
+  if (docCount > 1) {
+    docCount--;
+
+    xml1.loadXML(docArray[docCount-1].xml);
+
+    rsScript.innerText = recordsetArray[docCount - 1];
+    xmlHere.innerHTML = xmlHereArray[docCount - 1];
+    tbl1.innerHTML = makeTable(xml1.recordset);
+
+    } else alert("You are already at the top level recordset");
+  }
+
+</SCRIPT>
+
+<XML id=xml1></XML>
+<XML id=testXML></XML>
+<H1>XML DSO Shape Interpreter</H1>
+<P class="directions">The following application displays XML as chaptered rowsets according
+to the heuristic used by the XML Data Source Object (XML DSO) for Internet Explorer 5.0.  You can use
+this tool to interpret how the XML DSO shapes a particular XML file.  To display the XML enter
+a URL into the text box marked "XML File" and press the "Get XML" button.</P>
+
+<P><SPAN class="label">XML File: </SPAN><INPUT TYPE=TEXT SIZE=50 NAME="xmlURL" VALUE="simple.xml">
+
+<INPUT TYPE=BUTTON VALUE="Get XML" onclick="loadData()"></P>
+
+<P class="directions">The box below contains the script for accessing the particular recordset.  What recordset this
+script accesses depends on the current record.  That current record is set when you click on a particular record.  For
+example, if you click on the first of three records, the current record is the first record and calls such as fields(0) 
+refer to the fields for that particular record.</P>
+
+<P><SPAN class="label">RecordSet: </SPAN><SPAN ID=rsScript></SPAN></P>
+
+<P class="directions">The table below is the relational interpretation of the XML.  The name of the field is
+in blue and the record names are in red.  The RECORD column does not represent an actual field within the recordset. 
+Fields containing pointers to 
+recordsets are marked with an "*" and highlight when you run the mouse over them.  All other
+fields contain text values.</P>
+
+<DIV ID=tbl1></DIV>
+<BR>
+<P class="directions">Press the "Back" button to navigate back up the tree.</P>
+<INPUT TYPE=BUTTON VALUE="Back" NAME="backButton" onclick="goBack()">
+<BR>
+<P class="directions">Press the button below to Show or Hide the XML being interpreted.</P>
+<INPUT TYPE=BUTTON VALUE="Show XML" NAME="xmlButton" onclick="showXML()">
+<DIV STYLE="display:none" ID=xmlHere></DIV>
+
+
+</BODY>
+</HTML>

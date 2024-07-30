@@ -1,0 +1,144 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define VER_FILETYPE                VFT_APP\r\n"
+    "#define VER_FILEDESCRIPTION_STR     ""FactReg Sample Application""\r\n"
+    "#define VER_INTERNALNAME_STR        ""FactReg""\r\n"
+    "#define VER_ORIGINALFILENAME_STR    ""FactReg.exe""\r\n"
+    "#include ""tpcver.ver""\r\n"
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 256
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOG DISCARDABLE  200, 200, 253, 263
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Factoid Application"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "This sample demonstrates how to take advantage of using factoids with the controls and applications which use neither Text Services Framework nor Ink API. ",
+                    IDC_STATIC,7,7,216,27
+    GROUPBOX        "Basic Factoids",IDC_STATIC,7,40,238,118
+    LTEXT           "&None",IDC_STATIC,17,54,29,8
+    EDITTEXT        IDC_EDIT_NONE,17,64,105,12,ES_AUTOHSCROLL
+    LTEXT           "&E-mail",IDC_STATIC,131,54,20,8
+    CONTROL         "",IDC_RE_EMAIL,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,131,64,105,12
+    LTEXT           "&Phone1",IDC_STATIC,17,78,29,8
+    EDITTEXT        IDC_EDIT_PHONE1,17,88,105,12,ES_AUTOHSCROLL
+    LTEXT           "&Phone2",IDC_STATIC,131,78,29,8
+    CONTROL         "",IDC_RE_PHONE2,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,131,88,105,12
+    LTEXT           "Nu&mber",IDC_STATIC,17,104,26,8
+    EDITTEXT        IDC_EDIT_NUMBER,17,113,65,12,ES_AUTOHSCROLL
+    LTEXT           "&Currency",IDC_STATIC,91,104,29,8
+    EDITTEXT        IDC_EDIT_CURRENCY,91,113,70,12,ES_AUTOHSCROLL
+    LTEXT           "Pe&rcent",IDC_STATIC,171,104,26,8
+    EDITTEXT        IDC_EDIT_PERCENT,171,113,65,12,ES_AUTOHSCROLL
+    LTEXT           "&Date",IDC_STATIC,17,128,16,8
+    CONTROL         "",IDC_RE_DATE,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,17,137,65,12
+    LTEXT           "&Time",IDC_STATIC,91,128,16,8
+    CONTROL         "",IDC_RE_TIME,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,91,137,70,12
+    LTEXT           "&Zip",IDC_STATIC,171,128,11,8
+    CONTROL         "",IDC_RE_ZIP,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,171,137,65,12
+    LTEXT           "&URL",IDC_STATIC,17,179,16,8
+    EDITTEXT        IDC_EDIT_URL,17,188,105,12,ES_AUTOHSCROLL
+    LTEXT           "&File Location",IDC_STATIC,131,179,41,8
+    CONTROL         "",IDC_RE_FILELOCATION,"RICHEDIT",ES_AUTOHSCROLL | 
+                    WS_BORDER | WS_TABSTOP,131,188,105,12
+    LTEXT           "&Wordlist (from registry)",IDC_STATIC,17,205,70,8
+    EDITTEXT        IDC_EDIT_WORDLIST_REG,17,214,105,12,ES_AUTOHSCROLL
+    LTEXT           "W&ordlist (from file)",IDC_STATIC,131,205,56,8
+    CONTROL         "",IDC_RE_WORDLIST_FILE,"RICHEDIT",ES_AUTOHSCROLL | 
+                    WS_BORDER | WS_TABSTOP,131,214,105,12
+    DEFPUSHBUTTON   "Close",IDCLOSE,191,242,50,14
+    GROUPBOX        "Factoids With Dictionaries",IDC_STATIC,7,166,238,68
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define VER_FILETYPE                VFT_APP
+#define VER_FILEDESCRIPTION_STR     "FactReg Sample Application"
+#define VER_INTERNALNAME_STR        "FactReg"
+#define VER_ORIGINALFILENAME_STR    "FactReg.exe"
+#include "tpcver.ver"
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

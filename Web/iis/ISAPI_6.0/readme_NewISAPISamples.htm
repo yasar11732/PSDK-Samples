@@ -1,0 +1,535 @@
+<head>
+<title>New ISAPI Samples</title>
+</head>
+<body><a name="top"></a>
+<h2>New ISAPI Samples</h2>
+<p>New ISAPI samples are available to help you learn to 
+write ISAPI applications faster. The new sample code includes a library of 
+useful header files that resolve a lot of issues that are raised in the various 
+newsgroups that are devoted to ISAPI developers.</p>
+<p><font color="blue"><b>Important</b></font> &nbsp; These samples are provided for 
+educational purposes only. They are not intended to be used in a production 
+environment, have not been tested in a production environment, and Microsoft 
+does not provide technical support for them.</p><br>
+<p><A href="#ovr">Sample Overview</A><br><A href="#req">Requirements</A><br><A href="#loc">Location of the Source Code</A><br><A href="#bld">Build and Install the 
+Sample</A><br><A href="#run">Run the Sample</A><br><A href="#out">Sample Output</A><br><A href="#hlp">Helpdesk</A></p><br>
+<h4><a name="ovr"></a>Sample 
+Overview</h4>
+<p>These samples are intended to show all of the <STRONG>ServerSupportFunctions</STRONG> in use. If you want to 
+learn about any of the <STRONG>ServerSupportFunctions</STRONG>, search for their names in 
+the sample source code to find how they are used.</p>
+<P>The grid below contains every ISAPI Extension and ISAPI 
+Filter <STRONG>ServerSupportFunction</STRONG> and identifies what version of IIS 
+they can be used on.</P>
+<table border="1"id=Table4 width="100%">
+  <tr>
+    <th>ISAPI Extension Functions </th>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div7><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_APPEND_LOG_PARAMETER</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div8><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_ABORTIVE_CLOSE</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div9><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_ASYNC_READ_CLIENT</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div10><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_CLOSE_CONNECTION</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div11><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_DONE_WITH_SESSION</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div12><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_EXECUTE_CHILD</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=product><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_EXEC_URL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div13><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_EXEC_UNICODE_URL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div14><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_ANONYMOUS_TOKEN</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div1><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_UNICODE_ANONYMOUS_TOKEN</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div15><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_CERT_INFO_EX</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div16><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_EXECUTE_FLAGS</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div2><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_EXEC_URL_STATUS</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div17><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_IMPERSONATION_TOKEN</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div18><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_REQUEST_HEADER</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div19><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_GET_SSPI_INFO</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div20><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_IO_COMPLETION</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div21><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_IS_CONNECTED</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div22><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_IS_KEEP_CONN</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div23><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_MAP_URL_TO_PATH</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div24><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_MAP_UNICODE_URL_TO_PATH</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div25><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_MAP_URL_TO_PATH_EX</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div3><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_MAP_UNICODE_URL_TO_PATH_EX</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div27><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_NORMALIZE_URL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div28><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_REFRESH_ISAPI_ACL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div4><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_REPORT_UNHEALTHY</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div5><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_SEND_CUSTOM_ERROR</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div29><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_SEND_URL_REDIRECT_RESP</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div30><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_SEND_RESPONSE_HEADER</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div31><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_SEND_RESPONSE_HEADER_EX</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div32><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_TRANSMIT_FILE</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div6><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;HSE_REQ_VECTOR_SEND</div></td>
+  <tr>
+    <th>ISAPI Filter Functions </th>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div34><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_ADD_HEADERS_ON_DENIAL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div35><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_DISABLE_NOTIFICATIONS</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div36><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_GET_CONNID</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div37><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_GET_PROPERTY</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div38><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_NORMALIZE_URL</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div39><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_SEND_RESPONSE_HEADER</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div40><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_SET_NEXT_READ_SIZE</div></td>
+    </tr>
+  <tr>
+    <td>
+      <div id=Div41><span class=version 
+      >&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 5.0]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS .1]</b>&nbsp;&nbsp;&nbsp;<b 
+      >[IIS 6.0]</b></span>&nbsp;SF_REQ_SET_PROXY_INFO</div></td>
+    </tr></table>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="req"></a>Requirements</h4>
+<p><b>Platforms:</b> Windows&nbsp;XP 
+with IIS 5.1 installed, Windows Server&nbsp;2003 family with IIS 6.0 installed 
+and ISAPI enabled<br><strong>Header: 
+</strong>Extensions declared in httpext.h and Filters declared in httpfilt.h</p>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="loc"></a>Location of the 
+Source Code</h4>
+<p>IIS samples are included in the CD and download versions 
+of the IIS Software Developer Kit (SDK). You can download the IIS SDK from 
+<a href="http://go.microsoft.com/fwlink/?LinkId=7298" target=_New>Platform SDK Update</a>. You can view the SDK (but not 
+sample source code or header files) at <A href="http://go.microsoft.com/fwlink/?linkid=1752" target="_New">MSDN Online</A>.</p>
+<P>After you install the samples, look for the folder named 
+<STRONG>NewISAPI</STRONG>,&nbsp;which contains the 
+following folders of source code files:</P>
+<p><font color="blue"><b>Important</b></font> &nbsp; Please keep the folder structure the 
+same unless you change the paths to include files in your project.</p>
+<table border="1"id=Table3 width="100%">
+  <tr>
+    <th>Folder</th>
+    <th>Description</th></tr>
+  <tr>
+    <td>inc</td>
+    <td>This folder contains a set of useful header files 
+      that resolve a lot of issues that are raised in the various newsgroups 
+      that are devoted to ISAPI developers.</td></tr>
+  <tr>
+    <td>Src</td>
+    <td>This folder contains the source code files for 
+      the headers that are contained in the <STRONG 
+      >inc</STRONG> folder.</td></tr>
+  <tr>
+    <td>CacheIsapi</td>
+    <td>ISAPI extension to demonstrate sending a response 
+      that's cacheable by the HTTP.sys response cache.</td></tr>
+  <tr>
+    <td>CustomAuth</td>
+    <td>ISAPI extension to demonstrate using a wildcard 
+      script map with HSE_REQ_EXEC_URL to implement a custom forms based 
+      authentication scheme.</td></tr>
+  <tr>
+    <td>DumpRequestInfo</td>
+    <td>ISAPI extension that dumps all information from 
+      an HTTP request. This sample also demonstrates use of the ISAREQUEST 
+      object to asynchronously send a buffered response.</td></tr>
+  <tr>
+    <td>HelloIsapi</td>
+    <td>A very simple ISAPI extension that demonstrates 
+      sending a basic response to an HTTP client.</td></tr>
+  <tr>
+    <td>PoolWrap</td>
+    <td>ISAPI extension to demonstrate the PoolWrap 
+      thread pool wrapper. This could be just about any extension. Basic 
+      functionality is as follows: 
+      <ul>
+        <li>A request with no query string will display the 
+        help page 
+        <li>A request with query string of "statistics" 
+        will return a page listing total request and busy page counts since this 
+        extension was initialized 
+        <li>A request with a single numeric argument on the 
+        query string will simulate waiting on a blocking call by sleeping for 
+        that number of milliseconds 
+        <li>A request with two numeric arguments on the 
+        query string separated by a '+' will simulate waiting on a blocking call 
+        by sleeping for a random amount of time between the first number and 
+        second number in milliseconds (if the second number is smaller than the 
+        first, then the help page will be returned)</li></ul></td></tr>
+  <tr>
+    <td>ReMapUrl</td>
+    <td>ISAPI extension to run as a wildcard script map 
+      and remap URLs.</td></tr>
+  <tr>
+    <td>UpCaseMap</td>
+    <td>
+      <P>ISAPI extension to demonstrate a wildcard script 
+      map that modifies request entity in a filter-like manner. </P>
+      <P>UpCaseMap will intercept requests and acquire the 
+      entity body. If the entity body is of a text mime type, then UpCaseMap 
+      will convert all characters to upper case and use HSE_REQ_EXEC_URL to hand 
+      off the modified request to be handled. UpCaseMap also does bounds 
+      checking to enforce a size limit on the amount of entity that will be 
+      accepted. If this size is exceeded by the client, a "413 Entity Too Large" 
+      response will be sent. UpCaseMap uses the ISABUFFER and ISAREQUEST helper 
+      objects. </P></td></tr>
+  <tr>
+    <td>WildCardMap</td>
+    <td>ISAPI extension to demonstrate a very simple 
+      wildcard script map that sees a request and passes it along for further 
+      processing.</td></tr></table><br>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="bld"></a>Build and Install 
+the Sample</h4>
+<p>To build this sample using the Visual C++ IDE, the 
+following steps must be performed:</p>
+<ol>
+  <li>Open the solution (VS.NET) or desktop (VS6) file to 
+  open the project. 
+  <li>Click <b>Build</b> to create the 
+  DLL. </li></ol>
+<p>To build and run this sample without using the Visual 
+C++ IDE, the following steps must be performed:</p>
+<ol>
+  <li>Type <b>NMAKE All</b> from the 
+  command line. For example, if your sample files are located in a folder called 
+  <code>C:\MySamples</code>, type the following at the 
+  command line: <pre>cd /d c:\MySamples
+NMAKE All
+</pre></li></ol>
+<p></p>
+<p>To install this sample, the following steps must be 
+performed:</p>
+<ol>
+  <li>Copy the DLL to a physical folder on your computer. 
+  For example, create a folder called <code 
+  >C:\Samples</code> and copy your sample DLL to that 
+  folder. 
+  <li>Create a virtual directory that maps to the physical 
+  folder containing your files. To create a virtual directory, open the Internet 
+  Information Services (IIS) Manager by clicking <b 
+  >Start</b>, <b>Run</b>, type <code 
+  >inetmgr</code> in the text box and click <b 
+  >OK</b>. Right-click the Web site where you want to create 
+  a virtual directory, click <b>New</b>, and click <b 
+  >Virtual Directory</b>. In the <b 
+  >Alias</b> text box, type the name you want for your 
+  virtual directory, for example, <code>MySample</code>. In 
+  the <b>Directory</b> text box, type the path to the 
+  folder that contains your files. 
+  <li>Configure strong security on your new virtual 
+  directory. Right-click the virtual directory name, click <b 
+  >Properties</b>, and click the <b 
+  >Directory Security</b> tab. Press F1 for tips on securing 
+  your virtual directory. 
+  <li>Use Windows Explorer to set restricted access control 
+  on the sample .dll file in its physical folder. For more information, click <b 
+  >Start</b>, <b>Help and Support</b>, 
+  and search for <b>Access Control</b>. </li></ol>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="run"></a>Run the 
+Sample</h4>
+<p>In order to run this sample, follow the instructions 
+listed below:</p>
+<ol>
+  <li>Browse to your sample Web files in Internet Explorer 
+  (IE). For example, if your files are in a virtual directory called <code 
+  ><CODE><CODE 
+  >MySample</CODE></CODE></code>, type <code 
+  >http://localhost/<CODE 
+  >MySample</CODE>/<EM 
+  >DLL_Name</EM>.dll</code> in the <b 
+  >Address</b> bar of IE. </li></ol>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="out"></a>Sample Output</h4>
+<p>Sample output differs for each sample.</p>
+<h4><A href="#top">to top</A></h4>
+<p></p>
+<h4><a name="hlp"></a>Help Desk</h4>
+<p>If here you do not find answers to your questions, visit 
+the <a href="http://go.microsoft.com/fwlink/?LinkId=1782" target=_New>Microsoft Help and Support</a> Web site.</p>
+<table border="1"id=Table5 width="100%">
+  <tr>
+    <th>Problem</th>
+    <th>Possible Solution</th></tr>
+  <tr>
+    <td>When browsing to the ASP page, IE returns <b 
+      >HTTP 404 - File not found</b></td>
+    <td>Verify that you have created a virtual directory 
+      of the same name you are typing in the Address box of IE....</td></tr>
+  <tr>
+    <td>When building the dll, C++ or VB returns the a 
+      permissions error.</td>
+    <td>Once you have called the dll from your web page, 
+      your system considers it a loaded dll. You must unload it to build it 
+      again, either by unloading the ASP application or deleting the dll from 
+      system32\dllcache.</td></tr>
+  <tr>
+    <td>When building the dll, C++ returns a permissions 
+      error.</td>
+    <td>Once you have called the dll from your web page, 
+      your system considers it a loaded dll. You must unload it to build it 
+      again, either by unloading the ASP application or deleting the dll from 
+      system32\dllcache.</td></tr>
+  <tr>
+    <td>When browsing to the dll, IE gives you a 
+      permissions error.</td>
+    <td>The folder and virtual directory must have 
+      Execute permissions set on them.</td></tr></table><br>
+  <font size="2"><a href="#top">to top</a></font>
+
+<hr class="iis" size="1">
+<p align="center"><i>© 1997-2003 Microsoft Corporation. All rights reserved.</i></p>
+
+ </body></html>

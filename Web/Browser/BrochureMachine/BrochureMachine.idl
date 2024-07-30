@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// BrochureMachine.idl : IDL source for BrochureMachine.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (BrochureMachine.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(A79007AB-EB8B-46DB-9225-5BF4BDD0BCAF),
+		dual,
+		helpstring("IPTLauncher Interface"),
+		pointer_default(unique)
+	]
+	interface IPTLauncher : IDispatch
+	{
+		[id(1), helpstring("method LaunchPT")] HRESULT LaunchPT();
+	};
+
+[
+	uuid(083432E4-7D93-43A8-96A5-37533C055A8E),
+	version(1.0),
+	helpstring("BrochureMachine 1.0 Type Library")
+]
+library BROCHUREMACHINELib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(B43D3361-D975-4BE2-87FE-438AB8E74394),
+		helpstring("PTLauncher Class")
+	]
+	coclass PTLauncher
+	{
+		[default] interface IPTLauncher;
+	};
+};

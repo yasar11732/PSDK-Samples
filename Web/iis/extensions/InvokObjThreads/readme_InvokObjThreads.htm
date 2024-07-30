@@ -1,0 +1,199 @@
+<head>
+<title>IIS Samples - ISAPI InvokObjThreads</title>
+</head>
+<body>
+
+<a name="top"></a>
+<p>
+<h2>IIS Samples - ISAPI InvokObjThreads</h2>
+<a name="IIS_InvokObjThreads"></a>
+
+<p>InvokObjThreads is a sample ISAPI extension to demonstrate invoking a method from an ActiveX Automation Server. This sample creates and uses its own thread pool and work item queue to process the requests, thereby freeing up threads belonging to IIS that would have otherwise been used.</p>
+
+<p><font color="blue"><b>Important</b></font> &nbsp; These samples are provided for educational purposes only. They are not 
+intended to be used in a production environment, have not been tested in a production 
+environment, and Microsoft does not provide technical support for them.
+
+<p>
+	&nbsp;</p>
+  <p>
+	<a href="#ovr">Sample Overview</a><br>
+	<a href="#req">Requirements</a><br>
+	<a href="#loc">Location of the Source Code</a><br>
+	<a href="#bld">Build and Install the Sample</a><br>
+	<a href="#run">Run the Sample</a><br>
+	<a href="#out">Sample Output</a><br>
+	<a href="#hlp">Helpdesk</a></p>
+  <p>
+	&nbsp;</p>
+  <h4><a name="ovr"></a>Sample Overview</h4>
+  <p>
+Interaction with COM objects requires careful library and thread management because of the IIS thread pool architecture.
+  </p>
+  <p>
+IIS maintains a pool of I/O threads that are used to service requests. These threads are also used to enter ISAPI filter and extension entry points, handling the callback functions. In the case of an out-of-process ISAPI, the threads are used up until the request is dispatched to the MTX instance responsible for handling the application. After either returning from the in-process ISAPI, or when the out-of-process request is handed off to MTX, the threads are returned to the thread pool.
+  </p>
+  <p>
+The IIS thread that calls your initialization code in DllMain or GetExtensionVersion may not be the same thread that calls HttpExtensionProc. It's likely that different threads will call HttpExtensionProc from request to request. This architecture provides fast request processing on your Web server.
+  </p>
+  <p>
+COM initialization, from CoInitialize or CoInitializeEx, affects the thread in which it's called. For this reason, you cannot initialize COM unless you uninitialize it before returning from your callback function. COM stores configuration information on a per-thread basis. When you call CoInitialize or CoInitializeEx, COM will use thread-local-storage to associate the information with the thread making the call.
+  </p>
+  <p>
+As a result of this architecture, you have two design options to use COM from ISAPI:
+  </p>
+  <p>
+You can do all of the initialization and uninitialization from within HttpExtensionProc for each request. This option forces initialization and uninitialization on each request. This causes performance to suffer, and leaves your code vulnerable to other ISAPI extensions that may have initialized COM on the IIS thread. CoInitialize and CoUninitialize need to be called in order. If one is called twice in a row, by different ISAPIs on the same thread, your users may see error 270. For more information on thread limitations, see the documentation on the MaxPoolThreads metabase key and the PoolThreadLimit metabase key. 
+You can create your own thread pool and work item queue, initializing them once when the ISAPI extension is loaded. This option, demonstrated by the InvokObjThreads sample, is preferred. In a real-world scenario, the ISAPI developer needs to create a balance between the number of threads and the size of the queue to optimize performance. This balance is different for each ISAPI. If performance is poor, increase the number of threads or reduce the maximum queue size.  
+Included with the project is an automation dll, GetUserName.dll. This is a simple ATL-based component with a single method, GetMyName(), which returns the user name for the context in which the component is running. The InvokObjThreads sample demonstrates creating an instance of the object from within an ISAPI extension, invoking the GetMyName() method, and returning the information to the browser. 
+  </p>
+  <p>
+Important   This sample uses Microsoft specific compiler extensions included with Microsoft Visual C++, and requires version 5.0 of the compiler or later. If the sample is built using the VC++ debug build option, the sample will use OutputDebugString to report the status of the worker threads. This will help to demonstrate the behavior of the thread pool at run time.
+  </p>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="req"></a>Requirements</h4>
+  <p>This sample requires the installation of the following software to
+  function properly:</p>
+  <ul>
+    <li>Windows XP Professional with IIS 5.1 installed or Windows XP Server with 
+    IIS 6.0 installed.</li>
+  </ul>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="loc"></a>Location of the Source Code</h4>
+  <p>IIS samples are included in the IIS Software Developer Kit (SDK). 
+  You can download the IIS SDK from 
+  <a href="http://go.microsoft.com/fwlink/?LinkId=7298">Platform SDK Update</a>. 
+  You can view the SDK at <a href="http://go.microsoft.com/fwlink/?LinkId=1694">MSDN Online</a>. 
+  In the table of contents at MSDN Online, click <b>Web Development</b>, <b>Server Technologies</b>, 
+  <b>Internet Information Services (IIS)</b>, <b>SDK Documentation</b>, 
+  <b>Internet Information Services</b>, <b>Samples</b>.</p>
+  <p>The following source code files are required for this sample:</p>
+  <table border="1">
+    <tr>
+      <th>File</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>InvokObjThreads.sln</td>
+      <td>InvokObjThreads Visual Studio .NET solution file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>InvokObjThreads.vcproj</td>
+      <td>InvokObjThreads Visual Studio .NET C Project file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>InvokObjThreads.dsp, InvokObjThreads.dsw</td>
+      <td>InvokObjThreads Visual Studio 6.0 project files, required to build this sample in Visual Studio Version 6.</td>
+    </tr>
+    <tr>
+      <td>InvokObjThreads.cpp, IsapiThread.cpp</td>
+      <td>InvokObjThreads source modules containing the code that implements the sample.</td>
+    </tr>
+	<tr>
+	  <td>InvokObjThreads.def</td>
+	  <td>InvokObjThreads.dll definition containing code for creating the sample.</td>
+    </tr>
+	<tr>
+	  <td>IsapiThread.h</td>
+	  <td>InvokObjThreads header file containing commonly called routines.</td>
+    </tr>
+	<tr>
+	  <td>MAKEFILE</td>
+	  <td>InvokObjThreads makefile for command line compilation</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="bld"></a>Build and Install the Sample</h4>
+  <p>To build  this sample using the Visual C++ IDE, the following
+  steps must be performed:</p>
+  <ol>
+    <li>Open the solution (VS.NET) or desktop (VS6) file to open the project.</li>
+    <li>Click <b>Build</b> to create the DLL.</li>
+  </ol>
+  <p>To build and run this sample without using the Visual C++ IDE, the
+  following steps must be performed:</p>
+  <ol>
+    <li>Type <b>NMAKE All</b> from the command line. For example, if your sample files are located in a folder called <code>C:\MySamples</code>, type the following at the command line:      <pre>cd /d c:\MySamples NMAKE All</pre>
+    </li>
+  </ol>
+  <p>&nbsp;</p>
+  <p>To install this sample, the following steps must be performed:</p>
+  <ol>
+  <li>Copy the InvokObjThreads.dll to a physical folder on your computer. For example, 
+  create a folder called <code>C:\Samples</code> and copy the InvokObjThreads.sll to that folder.</li>
+  <li>Create a virtual directory that maps to the physical folder containing your files. To create 
+  a virtual directory, open the Internet Information Services (IIS) Manager by clicking <b>Start</b>, 
+  <b>Run</b>, type <code>inetmgr</code> in the text box and click <b>OK</b>. Right-click on the Web 
+  site where you want to create a virtual directory, click <b>New</b>, and click <b>Virtual 
+  Directory</b>. In the <b>Alias</b> text box, type the name you want for your virtual directory, for 
+  example, <code>Sample_Name</code>. In the <b>Directory</b> text box, type the path to the 
+  folder that contains your files.
+  <li>Configure strong security on your new virtual directory. Right-click the virtual directory name, 
+  click <b>Properties</b>, and click the <b>Directory Security</b> tab. Press F1 for tips on 
+  securing your virtual directory.</li>
+  <li>Use Windows Explorer to set restricted access control on the sample .dll file in its physical folder. 
+  For more information, click <b>Start</b>, <b>Help and Support</b>, and search for <b>Access Control</b>.</li>
+  <li>Register GetUserName.dll with the following command line. If you do not do this, the browser will report error 800401f3: <code>regsvr32 getusername.dll</code></li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="run"></a>Run the Sample</h4>
+  <p>In order to run this sample, follow the instructions listed below:</p>
+  <ol>
+    <li>Reference the InvokObjThreads.dll file as a URL from a browser. For example, if your files are in a virtual directory called <code>InvokObjThreads</code>, type 
+  <code>http://localhost/InvokObjThreads/InvokObjThreads.dll</code> in the <b>Address</b> bar 
+  of IE.
+    </li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="out"></a>Sample Output</h4>
+  <p>The following output is displayed somewhere after you perform step 1
+  from <b>Run the Sample</b>.</p>
+  <pre><b>Request handled by thread 932.</b>
+
+--------------------------------------------------------------------------------
+The GetMyName method returned IUSR_<i>&lt;computer_name&gt;</i></pre>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="hlp"></a>Help Desk</h4>
+  <p>If here you do not find answers to your questions, visit the 
+  <a href="http://go.microsoft.com/fwlink/?linkid=1782">Microsoft Help and Support</a> 
+  Web site.</p>
+  <table border="1">
+    <tr>
+      <th>Problem</th>
+      <th>Possible Solution</th>
+    </tr>
+    <tr>
+      <td>When browsing to the ASP page, IE returns <b>HTTP 404 - File not found</b></td>
+      <td>Verify that you have created a virtual directory of the same name you
+        are typing in the Address box of IE....</td>
+    </tr>
+    <tr>
+      <td>When building the dll, C++ or VB returns the a permissions error.</td>
+      <td>Once you have called the dll from your web page, your system considers
+        it a loaded dll. You must unload it to build it again, either by
+        unloading the ASP application or deleting the dll from system32\dllcache.</td>
+    </tr>
+    <tr>
+      <td>When building the dll, C++ returns a permissions error.</td>
+      <td>Once you have called the dll from your web page, your system considers
+        it a loaded dll. You must unload it to build it again, either by
+        unloading the ASP application or deleting the dll from system32\dllcache.</td>
+    </tr>
+    <tr>
+      <td>When browsing to the dll, IE gives you a permissions error.</td>
+      <td>The folder and virtual directory must have Execute permissions set on them.</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+
+<hr class="iis" size="1">
+<p align="center"><i>© 1997-2002 Microsoft Corporation. All rights reserved.</i></p>
+
+</body>
+</html>

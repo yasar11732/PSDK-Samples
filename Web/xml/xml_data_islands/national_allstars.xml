@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!-- 1999 National League All-Star Team Starters -->
+
+<xml>
+  <player>
+    <name>Mike Piazza</name>
+    <position>C</position>
+    <team>New York Mets</team>
+    <votes>1645304</votes>
+  </player>
+  <player>
+    <name>Mark McGwire</name>
+    <position>1B</position>
+    <team>St. Louis Cardinals</team>
+    <votes>1669066</votes>
+  </player>
+  <player>
+    <name>Jay Bell</name>
+    <position>2B</position>
+    <team>Arizona Diamondbacks</team>
+    <votes>1203902</votes>
+  </player>
+  <player>
+    <name>Matt Williams</name>
+    <position>3B</position>
+    <team>Arizona Diamondbacks</team>
+    <votes>1310799</votes>
+  </player>
+  <player>
+    <name>Barry Larkin</name>
+    <position>SS</position>
+    <team>Cincinnati Reds</team>
+    <votes>858203</votes>
+  </player>
+  <player>
+    <name>Sammy Sosa</name>
+    <position>OF</position>
+    <team>Chicago Cubs</team>
+    <votes>2315204</votes>
+  </player>
+  <player>
+    <name>Larry Walker</name>
+    <position>OF</position>
+    <team>Colorado Rockies</team>
+    <votes>1147524</votes>
+  </player>
+  <player>
+    <name>Tony Gwynn</name>
+    <position>OF</position>
+    <team>San Diego Padres</team>
+    <votes>1054785</votes>
+  </player>
+</xml>

@@ -1,0 +1,64 @@
+#----- Include the PSDK's WIN32.MAK to pick up defines-------------------
+!include <win32.mak>
+
+CLIENTPROJ = SecClnt
+SERVERPROJ = SecSvr
+PSPROJ = psMyProp
+IDL=MyProp
+
+
+all: $(OUTDIR) $(OUTDIR)\$(IDL).h  $(OUTDIR)\$(PSPROJ).dll $(OUTDIR)\$(CLIENTPROJ).exe $(OUTDIR)\$(SERVERPROJ).exe 
+$(OUTDIR):
+     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+$(OUTDIR)\$(IDL).h: $(IDL).idl
+      $(midl) $(MIDL_OPTIMIZATION) /h $(IDL).h /tlb $(IDL).tlb /out $(OUTDIR) $(IDL).idl
+
+
+EXTRA_PSLIBS = rpcrt4.lib 
+
+LINK32_PSOBJS = $(OUTDIR)\$(IDL)_p.obj \
+              $(OUTDIR)\$(IDL)_i.obj \
+              $(OUTDIR)\dlldata.obj
+
+.c.obj:
+     $(cc) $(cflags) $(cdebug) $(cvarsdll) /DREGISTER_PROXY_DLL /D_WIN32_DCOM /DPSPERF_EXPORTS /D_USRDLL /D_MBCS /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" $**
+
+$(OUTDIR)\$(PSPROJ).dll:   $(LINK32_PSOBJS)
+     $(link) $(ldebug) $(dlllflags) $(olelibsdll) /MACHINE:$(CPU) /PDB:$(OUTDIR)\$(PSPROJ).pdb -out:$(OUTDIR)\$(PSPROJ).dll /DEF:$(PSPROJ).def  $(LINK32_PSOBJS) $(EXTRA_PSLIBS) $(baselibs) $(olelibs) 
+
+
+
+#.rc{$(OUTDIR)}.res:
+#     $(rc) $(rcvars) $(rflags) $**
+
+
+.cpp{$(OUTDIR)}.obj:
+     $(cc) $(cflags) -Gz $(cdebug) $(cvarsdll) /D_MBCS /D_CONSOLE /D_UNICODE /I $(OUTDIR) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" $**
+
+
+# Client
+
+CLIENT_LINK32_OBJS = $(OUTDIR)\$(CLIENTPROJ).obj \
+              $(CLIENTPROJ).res 
+
+$(OUTDIR)\$(CLIENTPROJ).exe:   $(CLIENT_LINK32_OBJS) 
+     $(link) $(ldebug) $(guilflags) $(olelibsmt) /MACHINE:$(CPU) /PDB:$(OUTDIR)\$(CLIENTPROJ).pdb -out:$(OUTDIR)\$(CLIENTPROJ).exe $(CLIENT_LINK32_OBJS) $(EXTRA_LIBS) $(baselibs) $(olelibs) 
+
+
+SERVER_LINK32_OBJS = $(OUTDIR)\$(SERVERPROJ).obj \
+              $(SERVERPROJ).res
+
+$(OUTDIR)\$(SERVERPROJ).exe:   $(SERVER_LINK32_OBJS) 
+     $(link) $(ldebug) $(guilflags) $(olelibsmt) /MACHINE:$(CPU) /PDB:$(OUTDIR)\$(SERVERPROJ).pdb -out:$(OUTDIR)\$(SERVERPROJ).exe $(SERVER_LINK32_OBJS) $(EXTRA_LIBS) $(baselibs) $(olelibs) 
+
+
+
+clean:
+     $(CLEANUP)
+  
+
+
+#EXTRA_LIBS = odbccp32.lib odbc32.lib shell32.lib advapi32.lib
+
+#EXTRA_PSLIBS = rpcrt4.lib 

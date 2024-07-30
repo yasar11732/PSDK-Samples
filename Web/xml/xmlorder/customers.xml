@@ -1,0 +1,89 @@
+<root>
+  <customers>
+    <customer ID="AB1" Index="1">
+      <company_name>Adam's</company_name>
+      <first-name>Adam</first-name>
+      <middle-name></middle-name>
+      <last-name>Barr</last-name>
+      <address_1>1234 Foo St.</address_1>
+      <address_2>Suite 123</address_2>
+      <city>Redmond</city>
+      <state>WA</state>
+      <zip>98052</zip>
+      <home_phone>555-555-5555</home_phone>
+      <work_phone>555-555-5556</work_phone>
+      <method_of_payment>Visa</method_of_payment>
+      <cc_exp>01/01/2001</cc_exp>
+      <cc_num>0000-0000-0000-0000</cc_num>
+      <ship_address_1>1235 Foo St.</ship_address_1>
+      <ship_address_2></ship_address_2>
+      <ship_city>Redmond</ship_city>
+      <ship_state>98052</ship_state>
+      <ship_zip>WA</ship_zip>
+    </customer>
+    <customer ID="CL1" Index="1">
+      <company_name>Microsoft</company_name>
+      <first-name>Chris</first-name>
+      <middle-name>J</middle-name>
+      <last-name>Lovett</last-name>
+      <address_1>18606 201st Ave NE</address_1>
+      <address_2></address_2>
+      <city>Woodinville</city>
+      <state>WA</state>
+      <zip>98072</zip>
+      <home_phone>(425) 844 4305</home_phone>
+      <work_phone></work_phone>
+      <method_of_payment>VISA</method_of_payment>
+      <cc_exp>6/00</cc_exp>
+      <cc_num>1213 2332 1454 1312</cc_num>
+      <ship_address_1>18606 201st Ave NE</ship_address_1>
+      <ship_address_2></ship_address_2>
+      <ship_city>Woodinville</ship_city>
+      <ship_state>WA</ship_state>
+      <ship_zip>98072</ship_zip>
+    </customer>
+    <customer ID="JM1" Index="1">
+      <company_name>phd</company_name>
+      <first-name>Jason</first-name>
+      <middle-name>Damian</middle-name>
+      <last-name>Masterman</last-name>
+      <address_1>111222</address_1>
+      <address_2></address_2>
+      <city>some city</city>
+      <state>az</state>
+      <zip>92656</zip>
+      <home_phone>555-1212</home_phone>
+      <work_phone></work_phone>
+      <method_of_payment>Visa</method_of_payment>
+      <cc_exp>3/02</cc_exp>
+      <cc_num>1234456777999</cc_num>
+      <ship_address_1>111222</ship_address_1>
+      <ship_address_2></ship_address_2>
+      <ship_city>some city</ship_city>
+      <ship_state>AZ</ship_state>
+      <ship_zip>92656</ship_zip>
+    </customer>
+    <customer ID="CP1" Index="1">
+      <company_name>Test Company</company_name>
+      <first-name>Chris</first-name>
+      <middle-name>J</middle-name>
+      <last-name>Predeek</last-name>
+      <address_1>2169 N El Dorado Blvd Apt 4</address_1>
+      <address_2></address_2>
+      <city>Klamath Falls</city>
+      <state>OR</state>
+      <zip>97601</zip>
+      <home_phone>541.273.1614</home_phone>
+      <work_phone></work_phone>
+      <method_of_payment>VISA</method_of_payment>
+      <cc_exp>12/00</cc_exp>
+      <cc_num>129837984327</cc_num>
+      <ship_address_1>2169 N El Dorado Blvd Apt 4</ship_address_1>
+      <ship_address_2></ship_address_2>
+      <ship_city>Klamath Falls</ship_city>
+      <ship_state>OR</ship_state>
+      <ship_zip>97601</ship_zip>
+    </customer>
+  </customers>
+</root>
+

@@ -1,0 +1,13 @@
+[Version]
+signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[Add.Code]
+BrochureMachine.dll=BrochureMachine.dll
+
+[BrochureMachine.dll]
+file-win32-x86=thiscab
+RegisterServer=yes
+CLSID={B43D3361-D975-4BE2-87FE-438AB8E74394}
+DestDir=
+FileVersion=1,0,0,0

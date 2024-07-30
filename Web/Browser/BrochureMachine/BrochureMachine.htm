@@ -1,0 +1,1049 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>BrochureMachine.htm</TITLE>
+<STYLE TYPE="text/css">
+#logo {
+	position:absolute;
+	top:5;
+	left:5;
+	width:180;
+	height:65;
+	color:white;
+	font-size:22px;
+	font-family:Verdana;
+	font-weight:bold;
+}
+.ui {
+	background-color:threedface;
+	border-bottom:3 outset threedshadow;
+	border-right:3 outset threedshadow;
+	border-top:3 outset threedhighlight;
+	border-left:3 outset threedhighlight;
+	position:absolute;
+	top:5;
+	height:65;
+	width:550px;
+	top:5;
+	left:150;
+	align:center;
+	margin:0px;
+	padding:0px;
+}
+#pagecontainer {
+	position:absolute;
+	top:75;
+	left:5;
+	width:100%;
+	overflow:auto;
+	background:threedshadow;
+	border:inset;
+}
+#zoomcontainer {
+	zoom:75%;
+	width:100%;
+	position:absolute;
+}
+.lorstyle {
+	width:2.66in;
+	height:7.5in;
+	margin:.5in;
+	border:1 dashed gray;
+	overflow-y:auto;
+	overflow-x:auto;
+}
+.pagestyle {
+	width:11in;
+	height:8.5in;
+	background:white;
+	zoom:100%;
+}
+.borderstyle {
+	width:11in;
+	height:8.5in;
+	background:black;
+	border-left:1 solid black;
+	border-top:1 solid black;
+	border-right:4 solid black;
+	border-bottom:4 solid black;
+	margin:5px;
+}
+BUTTON {
+	height:25;
+	width:25;
+	behavior:url("..\styles\tbtn.htc");
+	border:1px solid threedface;
+}
+.buttonOn {
+	height:25;
+	width:25;
+	border:1px solid black;
+	border-top:1px solid white;
+	border-left:1px solid white;
+	text-align:center;
+}
+.buttonDown {
+	height:25;
+	width:25;
+	border-top:1px solid white;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	background:#e1e1e1; text-align:center;
+}
+.btn {
+	behavior:url("..\styles\btn.htc");
+	border-color:mediumblue;
+	cursor:default;
+	font-family:Arial;
+	color:black;
+	text-decoration:none;
+	position:absolute;
+	top:95%;
+	left:5;
+	text-align:center;
+}
+.bar {
+	background:#336699;
+	width:100%;
+	border-top:1px solid #99CCFF;
+	border-bottom:1px solid #000000;
+	padding:5
+}
+.desbar {
+	background:#FFFFFF;
+	width:100%;
+	padding: 10px;
+	border-top:1px solid #CCCCCC;
+	color:black;
+	font-size:9pt;
+}
+.title {
+	font-size:15pt;
+	color:white;
+	padding-left:10px;
+}
+.copyBar {
+	margin-top:5px;
+	text-align:left;
+	border-top:1px solid #cccccc;
+	font-weight:bold;
+	font-family:verdana;
+	font-size:9pt;
+	padding:5px;
+	cursor:hand;
+	background:#cccccc;
+}
+a:link {
+	text-decoration:none;
+	color:white
+}
+a:visited {
+	text-decoration:none;
+	color:white
+}
+a:active {
+	text-decoration:none;
+	color:white
+}
+a:hover {
+	text-decoration:none;
+	color:yellow
+}
+</STYLE>
+
+<SCRIPT FOR="fontBox" EVENT="onchange">
+document.execCommand("FontName", false, fontBox[fontBox.selectedIndex].value);
+</SCRIPT>
+
+<SCRIPT FOR="sizeBox" EVENT="onchange">
+document.execCommand("FontSize", false, sizeBox[sizeBox.selectedIndex].value);
+</SCRIPT>
+
+<SCRIPT FOR="colorBox" EVENT="onchange">
+document.execCommand("ForeColor", false, colorBox[colorBox.selectedIndex].value);
+</SCRIPT>
+
+<SCRIPT FOR="bgBox" EVENT="onchange">
+document.execCommand("BackColor", false, bgBox[bgBox.selectedIndex].value);
+</SCRIPT>
+
+<SCRIPT FOR="vert" EVENT="onclick">
+oElem = document.selection.createRange().parentElement();
+if (oElem.currentStyle.writingMode == 'tb-rl')
+	oElem.style.writingMode = 'lr-tb';
+else
+	oElem.style.writingMode = "tb-rl";
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+var iTimerID = null;
+var iInitTimerInterval = 100;
+var iInitMoveUnit = 4;
+var iMoveUnit = iInitMoveUnit;
+var iTimerInterval = iInitTimerInterval;
+var iTimerPhase = 1;
+var oImage = null;
+var oLorStyleClass = null;
+
+function Init()
+{
+	document.brochureInfo = new Object();
+	document.brochureInfo.marginInfo = new Object();
+	document.brochureInfo.watermarkInfo = new Object();
+	document.brochureInfo.watermarkInfo.frontWM = new Object();
+	document.brochureInfo.watermarkInfo.backWM = new Object();
+	oLorStyleClass = FindStyleRule(".lorstyle");
+	pagecontainer.style.clientTop = 75;
+	ResizeApp();
+	SetMargins();
+	document.onselectionchange = OnSelectHandler;
+}
+function ShowPrintPreview()
+{
+	// Code to initialize brochureInfo with margin and watermark information
+	document.brochureInfo.marginInfo.top = oLorStyleClass.style.marginTop;
+	document.brochureInfo.marginInfo.bottom = oLorStyleClass.style.marginBottom;
+	document.brochureInfo.marginInfo.sides = oLorStyleClass.style.marginLeft;
+
+	document.all.PTLauncher.LaunchPT();
+}
+function ChangeZoom(zoomVal)
+{
+	zoomcontainer.style.zoom = zoomVal;
+}
+function ResizeApp()
+{
+	pagecontainer.style.height = document.body.clientHeight - pagecontainer.style.clientTop - 25;
+	pagecontainer.style.width = document.body.clientWidth - 10;
+	copyright.style.top = document.body.clientHeight - 20;
+}
+function ShowMarginUI()
+{
+	margineditui.style.display = "block";
+	texteditui.style.display = "none";
+}
+function HideMarginUI()
+{
+	margineditui.style.display = "none";
+	texteditui.style.display = "block";
+}
+function ShowImageUI()
+{
+	imageeditui.style.display = "block";
+	texteditui.style.display = "none";
+}
+function HideImageUI()
+{
+	imageeditui.style.display = "none";
+	texteditui.style.display = "block";
+}
+function ShowWatermarkUI()
+{
+	watermarkeditui.style.display = "block";
+	InitWatermarkUI();
+	texteditui.style.display = "none";
+}
+function HideWatermarkUI()
+{
+	watermarkeditui.style.display = "none";
+	texteditui.style.display = "block";
+}
+function InitWatermarkUI()
+{
+	if (frontradiobutton.checked)
+	{
+		wmID = "watermarkfront";
+		watermarkfront.scrollIntoView("top");;
+	}
+	else
+	{
+		wmID = "watermarkback";
+		watermarkback.scrollIntoView("top");;
+	}
+
+	document.all(wmID).style.width = document.all(wmID).width;
+	document.all(wmID).style.height = document.all(wmID).width;
+
+	sSrc = document.all(wmID).src
+	sSrc = sSrc.substring(sSrc.lastIndexOf("/") + 1);
+
+	if (document.all(wmID).style.display == "none") wmstandardimage.selectedIndex = 0;
+	else if (sSrc == "books2.gif") wmstandardimage.selectedIndex = 1;
+	else if (sSrc == "globe2.gif") wmstandardimage.selectedIndex = 2;
+	else if (sSrc == "clock2.gif") wmstandardimage.selectedIndex = 3;
+	else wmstandardimage.selectedIndex = 4;
+}
+
+function wmStandardImageChange()
+{
+	if (frontradiobutton.checked)
+		wmID = "watermarkfront";
+	else wmID = "watermarkback";
+
+	sOption = wmstandardimage.options[wmstandardimage.selectedIndex].text;
+	if (sOption == "None")
+	{
+		document.all(wmID).style.display = "none";
+		return;
+	}
+	if (sOption == "Custom") return;
+
+	sTop = document.all(wmID).style.top;
+	sLeft = document.all(wmID).style.left;
+	document.all(wmID).style.display = "block";
+	sSrc = wmstandardimage.options[wmstandardimage.selectedIndex].value;
+
+	document.all(wmID).clearAttributes();
+	fileinputcontainer.reset();
+	document.all(wmID).style.position = "absolute";
+	document.all(wmID).src = sSrc;
+	document.all(wmID).style.top = sTop;
+	document.all(wmID).style.left = sLeft;
+	InitWatermarkUI();
+}
+
+function wmCustomImageChange()
+{
+	if (frontradiobutton.checked)
+		wmID = "watermarkfront";
+	else wmID = "watermarkback";
+
+	sNewSrc = fileinputcontainer.elements("wmcustomimage").value;
+	if (sNewSrc == "") return;
+	sTop = document.all(wmID).style.top;
+	sLeft = document.all(wmID).style.left;
+
+	document.all(wmID).clearAttributes();
+
+	document.all(wmID).src = sNewSrc;
+	document.all(wmID).style.position = "absolute";
+	document.all(wmID).style.top = sTop;
+	document.all(wmID).style.left = sLeft;
+
+	InitWatermarkUI();
+}
+
+function SetMargins()
+{
+	fTop = parseFloat(document.all.topmargininput.value, 10);
+	fBottom = parseFloat(document.all.bottommargininput.value, 10);
+	fSides = parseFloat(document.all.sidemargininput.value, 10);
+
+	if (!(fTop && fBottom && fSides)) return; // make sure values are valid numbers
+	if (fTop <= 0 || fBottom <= 0 || fSides <= 0) return;
+
+	fHeight = 8.5 - (fTop + fBottom);
+	fWidth = (11 - (6 * fSides))/3;
+	// Truncate to two decimal places
+	fWidth = Math.floor(fWidth * 100)/100
+
+	if (fHeight < .01 || fWidth < .01) return;
+
+	oLorStyleClass.style.width = fWidth + "in";
+	oLorStyleClass.style.height = fHeight + "in";
+	oLorStyleClass.style.marginTop = fTop + "in";
+	oLorStyleClass.style.marginBottom = fBottom + "in";
+	oLorStyleClass.style.marginRight = fSides + "in";
+	oLorStyleClass.style.marginLeft = fSides + "in";
+}
+
+function FindStyleRule(styleName)
+{
+	for (i = 0; i < document.styleSheets.length; i++)
+	{
+		for (j = 0; j < document.styleSheets(i).rules.length; j++)
+		{
+			if (document.styleSheets(i).rules(j).selectorText == styleName)
+				return document.styleSheets(i).rules(j);
+		}
+	}
+}
+
+function MoveOrResizeImage(sAction)
+{
+	switch (iTimerPhase)
+	{
+		case 1:
+		iTimerInterval--;
+		if (iTimerInterval == (.9 * iInitTimerInterval))
+		{
+			iTimerPhase = 2;
+			iMoveUnit *= 2;
+
+			window.clearInterval(iTimerID);
+			iTimerID = window.setInterval(
+						"MoveOrResizeImage('" + sAction + "')",
+						iTimerInterval);
+		}
+		break;
+
+		case 2:
+		iTimerInterval = iTimerInterval - 10;
+		if (iTimerInterval < 1)
+		{
+			iTimerInterval = 1;
+			iTimerPhase = 3;
+			iMoveUnit *= 2;
+
+			window.clearInterval(iTimerID);
+			iTimerID = window.setInterval(
+						"MoveOrResizeImage('" + sAction + "')",
+						iTimerInterval);
+		}
+		break;
+
+		case 3:
+		break;
+	}
+
+	window.status = iTimerInterval;
+
+	switch (sAction)
+	{
+		case "Move Left":
+		oImage.style.pixelLeft -= iMoveUnit;
+		break;
+
+		case "Move Right":
+		oImage.style.pixelLeft += iMoveUnit;
+		break;
+		case "Move Up":
+		oImage.style.pixelTop -= iMoveUnit;
+		break;
+
+		case "Move Down":
+		oImage.style.pixelTop += iMoveUnit;
+		break;
+
+		case "Wider":
+		oImage.style.pixelWidth += iMoveUnit;
+		break;
+
+		case "Narrower":
+		if (oImage.style.pixelWidth <= iMoveUnit)
+			oImage.style.pixelWidth = 0;
+		else oImage.style.pixelWidth -= iMoveUnit;
+		break;
+
+		case "Taller":
+		oImage.style.pixelHeight += iMoveUnit;
+		break;
+
+		case "Shorter":
+		if (oImage.style.pixelHeight <= iMoveUnit)
+			oImage.style.pixelHeight = 0;
+		else oImage.style.pixelHeight -= iMoveUnit;
+		break;
+	}
+}
+
+function DoTimeOut()
+{
+	oImage = GetTargetImage();
+	if (!oImage) return;
+
+	iTimerID = window.setInterval(
+						"MoveOrResizeImage('" + event.srcElement.title + "')",
+						iTimerInterval);
+}
+
+function UndoTimeOut()
+{
+	window.clearInterval(iTimerID);
+	iTimerID = null;
+	iTimerInterval = iInitTimerInterval;
+	iMoveUnit = iInitMoveUnit;
+	oImage = null;
+	iTimerPhase = 1;
+}
+
+function GetTargetImage()
+{
+	if (watermarkeditui.style.display == "block")
+	{
+		if (frontradiobutton.checked)
+			return watermarkfront;
+		else
+			return watermarkback;
+	}
+	if (imageeditui.style.display == "block")
+	{
+		if (document.selection.type != "Control") return null;
+		oControl = document.selection.createRange();
+		if (oControl.length > 1) return null;
+		if (oControl(0).tagName == "IMG") return oControl(0);
+	}
+
+	return null;
+}
+
+function AlignImage(sDirection)
+{
+	oImage = GetTargetImage();
+	if (!oImage) return;
+	sDirection = sDirection.toLowerCase();
+	if (sDirection == "left" ||
+		sDirection == "right") oImage.align = sDirection;
+	else if (sDirection == "noalign") oImage.removeAttribute("align", 0);
+}
+
+function ImageChange()
+{
+	sNewSrc = imageinputcontainer.elements("imgselect").value;
+	if (sNewSrc == "") return;
+
+	oImage = GetTargetImage();
+	if (oImage)
+	{
+		oImage.src = sNewSrc;
+		return;
+	}
+}
+
+function ImageInsert()
+{
+	document.execCommand("InsertImage", true);
+}
+
+function OnSelectHandler()
+{
+	if (document.selection.type != "Control") return;
+	oControl = document.selection.createRange();
+	if (oControl.length > 1) return;
+	if (oControl(0).tagName != "IMG") return;
+
+	if (imageeditui.style.display == "block" &&
+		oControl(0).parentElement.id != "watermarkfront" &&
+		oControl(0).parentElement.id != "watermarkback")
+	{
+		sBorderColor = oControl(0).style.borderColor;
+		sBorderWidth = oControl(0).style.borderWidth;
+
+		imagebordercolorBox.selectedIndex = 0;
+		imageborderwidthBox.selectedIndex = 0;
+
+		for (i = 0; i < imagebordercolorBox.options.length; i++)
+		{
+			if (imagebordercolorBox.options[i].value == sBorderColor ||
+				imagebordercolorBox.options[i].innerText.toLowerCase() == sBorderColor.toLowerCase())
+			{
+				imagebordercolorBox.selectedIndex = i;
+				break;
+			}
+		}
+
+		for (i = 0; i < imageborderwidthBox.options.length; i++)
+		{
+			if (imageborderwidthBox.options[i].value + "px" == sBorderWidth)
+			{
+				imageborderwidthBox.selectedIndex = i;
+				break;
+			}
+		}
+
+	}
+}
+</SCRIPT>
+
+<SCRIPT FOR="imageborderwidthBox" EVENT="onchange">
+	oImage = GetTargetImage();
+	if (!oImage) return;
+
+	oImage.style.borderWidth = imageborderwidthBox[imageborderwidthBox.selectedIndex].value
+</SCRIPT>
+
+<SCRIPT FOR="imagebordercolorBox" EVENT="onchange">
+	oImage = GetTargetImage();
+	if (!oImage) return;
+
+	oImage.style.borderColor = imagebordercolorBox[imagebordercolorBox.selectedIndex].value
+</SCRIPT>
+
+<OBJECT ID="PTLauncher" CLASSID="CLSID:B43D3361-D975-4BE2-87FE-438AB8E74394" codebase="brochuremachine.cab"></OBJECT>
+</HEAD>
+
+<BODY ID="oBodyO" BGCOLOR="#003366" ONLOAD="Init()" ONRESIZE="ResizeApp()" SCROLL="no">
+
+<DIV ID="logo" UNSELECTABLE="on">Brochure Machine</DIV>
+
+<DIV ID="texteditui" CLASS="ui" UNSELECTABLE="on" STYLE="display:block;width:525">
+	<SPAN STYLE="position:absolute;left:5;top:3">
+	<BUTTON UNSELECTABLE="on" TITLE="Bold"
+		ONCLICK="document.execCommand('Bold')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/bold.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Italic"
+		ONCLICK="document.execCommand('Italic')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/italic.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Underline"
+		ONCLICK="document.execCommand('Underline')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/underline.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Strike-through"
+		ONCLICK="document.execCommand('StrikeThrough')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/form-strike.gif">
+	</BUTTON>
+
+	<IMG SRC="graphics/divider.gif" ALIGN="absmiddle" HSPACE="2">
+
+	<BUTTON UNSELECTABLE="on" TITLE="Superscript"
+		ONCLICK="document.execCommand('SuperScript')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/superscript.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Subscript"
+		ONCLICK="document.execCommand('SubScript')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/subscript.gif">
+	</BUTTON>
+
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:10;top:3">
+	<SELECT ID="fontBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="Arial" SELECTED>Arial</OPTION>
+		<OPTION VALUE="Courier">Courier</OPTION>
+		<OPTION VALUE="Garamond">Garamond</OPTION>
+		<OPTION VALUE="Tahoma">Tahoma</OPTION>
+		<OPTION VALUE="Times New Roman">Times</OPTION>
+		<OPTION VALUE="Verdana">Verdana</OPTION>
+	</SELECT>
+
+	<SELECT ID="sizeBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="1">1</OPTION>
+		<OPTION VALUE="2">2</OPTION>
+		<OPTION VALUE="3">3</OPTION>
+		<OPTION VALUE="4" SELECTED>4</OPTION>
+		<OPTION VALUE="5" >5</OPTION>
+		<OPTION VALUE="6">6</OPTION>
+		<OPTION VALUE="7">7</OPTION>
+	</SELECT>
+
+	<SELECT ID="colorBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="#000000" STYLE="color:black" SELECTED>Black</OPTION>
+		<OPTION VALUE="#0000cd" STYLE="color:mediumblue">Blue</OPTION>
+		<OPTION VALUE="#228b22" STYLE="color:forestgreen">Green</OPTION>
+		<OPTION VALUE="#ffff00" STYLE="color:yellow">Yellow</OPTION>
+		<OPTION VALUE="#ff8c00" STYLE="color:darkorange">Orange</OPTION>
+		<OPTION VALUE="#dc143c" STYLE="color:crimson">Red</OPTION>
+		<OPTION VALUE="#9400d3" STYLE="color:darkviolet">Purple</OPTION>
+		<OPTION VALUE="#808080" STYLE="color:gray">Gray</OPTION>
+		<OPTION VALUE="#ffffff" STYLE="color:white">White</OPTION>
+	</SELECT>
+
+	<SELECT ID="bgBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="#ffffff" STYLE="background-color:white; color:black" SELECTED>White</OPTION>
+		<OPTION VALUE="#000000" STYLE="background-color:black">Black</OPTION>
+		<OPTION VALUE="#1e90ff" STYLE="background-color:dodgerblue">Blue</OPTION>
+		<OPTION VALUE="#32cd32" STYLE="background-color:limegreen">Green</OPTION>
+		<OPTION VALUE="#ffff00" STYLE="background-color:yellow">Yellow</OPTION>
+		<OPTION VALUE="#ffa500" STYLE="background-color:orange">Orange</OPTION>
+		<OPTION VALUE="#ff0000" STYLE="background-color:red">Red</OPTION>
+		<OPTION VALUE="#9370db" STYLE="background-color:mediumpurple">Purple</OPTION>
+		<OPTION VALUE="#c0c0c0" STYLE="background-color:lavender">Gray</OPTION>
+	</SELECT>
+	</SPAN>
+
+	<BR>
+
+	<SPAN STYLE="position:absolute;left:5;bottom:3">
+	<BUTTON UNSELECTABLE="on" TITLE="Ordered List"
+		ONCLICK="document.execCommand('InsertOrderedList')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/numberlist.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Unordered List"
+		ONCLICK="document.execCommand('InsertUnorderedList')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/bulletlist.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Outdent"
+		ONCLICK="document.execCommand('Outdent')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/outdent.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Indent"
+		ONCLICK="document.execCommand('Indent')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/indent.gif">
+	</BUTTON>
+
+	<IMG SRC="graphics/divider.gif" ALIGN="absmiddle" HSPACE="2">
+
+	<BUTTON UNSELECTABLE="on" TITLE="Left Justify"
+		ONCLICK="document.execCommand('JustifyLeft')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/leftalign.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Center Justify"
+		ONCLICK="document.execCommand('JustifyCenter')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/centeralign.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Right Justify"
+		ONCLICK="document.execCommand('JustifyRight')"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/rightalign.gif">
+	</BUTTON>
+
+	<IMG SRC="graphics/divider.gif" ALIGN="absmiddle" HSPACE="2">
+
+	<BUTTON ID="vert" UNSELECTABLE="on" TITLE="Vertical"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className=''"
+		ONMOUSEUP="this.className='buttonOn'"
+		ONMOUSEDOWN="this.className='buttonDown'">
+		<IMG SRC="graphics/tool_vertical.gif">
+	</BUTTON>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:10;bottom:3">
+	<INPUT ID="marginbutton" TYPE="button" VALUE="Margins" ONCLICK="ShowMarginUI()" UNSELECTABLE="on"/>
+	<INPUT TYPE="button" VALUE="Images" ONCLICK="ShowImageUI()" UNSELECTABLE="on"/>
+	<INPUT TYPE="button" VALUE="Watermarks" ONCLICK="ShowWatermarkUI()" UNSELECTABLE="on"/>
+	</SPAN>
+</DIV>
+
+<DIV ID="imageeditui" CLASS="ui" UNSELECTABLE="on" STYLE="display:none;width:550">
+	<SPAN STYLE="position:absolute;left:10;top:3">
+	<INPUT TYPE="button" VALUE="Align Left" ONCLICK="AlignImage('left')" UNSELECTABLE="on"/>
+	<INPUT TYPE="button" VALUE="No Align" ONCLICK="AlignImage('noalign')" UNSELECTABLE="on"/>
+	<INPUT TYPE="button" VALUE="Align Right" ONCLICK="AlignImage('right')" UNSELECTABLE="on"/>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:320;top:3">
+	<INPUT TYPE="button" VALUE="Insert Image" ONCLICK="ImageInsert()" UNSELECTABLE="on"/>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:10;top:3">
+	<INPUT TYPE="button" VALUE="Done" ONCLICK="HideImageUI()" UNSELECTABLE="on"/>
+	</SPAN>
+
+	<BR>
+
+	<SPAN STYLE="position:absolute;left:10;bottom:3">
+	<B>Border:</B>
+	<SELECT ID="imageborderwidthBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="0" SELECTED>0</OPTION>
+		<OPTION VALUE="1">1</OPTION>
+		<OPTION VALUE="2">2</OPTION>
+		<OPTION VALUE="3">3</OPTION>
+		<OPTION VALUE="4">4</OPTION>
+		<OPTION VALUE="5">5</OPTION>
+		<OPTION VALUE="6">6</OPTION>
+		<OPTION VALUE="7">7</OPTION>
+	</SELECT>
+
+	<SELECT ID="imagebordercolorBox" SIZE="1" UNSELECTABLE="on">
+		<OPTION VALUE="" STYLE="color:black" SELECTED>N/A
+		<OPTION VALUE="#000000" STYLE="color:black">Black</OPTION>
+		<OPTION VALUE="#0000cd" STYLE="color:mediumblue">Blue</OPTION>
+		<OPTION VALUE="#228b22" STYLE="color:forestgreen">Green</OPTION>
+		<OPTION VALUE="#ffff00" STYLE="color:yellow">Yellow</OPTION>
+		<OPTION VALUE="#ff8c00" STYLE="color:darkorange">Orange</OPTION>
+		<OPTION VALUE="#dc143c" STYLE="color:crimson">Red</OPTION>
+		<OPTION VALUE="#9400d3" STYLE="color:darkviolet">Purple</OPTION>
+		<OPTION VALUE="#808080" STYLE="color:gray">Gray</OPTION>
+		<OPTION VALUE="#ffffff" STYLE="color:white">White</OPTION>
+	</SELECT>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:230;bottom:3">
+	<B>Change Image:</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:320;bottom:3">
+	<FORM ID="imageinputcontainer" STYLE="display:inline" UNSELECTABLE="on">
+		<INPUT ID="imgselect" TYPE="file" NAME="userFile" SIZE="10" ONPROPERTYCHANGE="ImageChange()" UNSELECTABLE="on">
+	</FORM>
+	</SPAN>
+</DIV>
+
+<DIV ID="watermarkeditui" CLASS="ui" UNSELECTABLE="on" STYLE="display:none;width:550">
+	<SPAN STYLE="position:absolute;left:10;top:3">
+	<INPUT ID="frontradiobutton" TYPE="Radio" NAME="page" VALUE="front" CHECKED
+		ONCLICK="InitWatermarkUI()" UNSELECTABLE="on">
+	<B>Front</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:80;top:3">
+	<BUTTON UNSELECTABLE="on" TITLE="Move Left"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/movelft.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Move Right"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/movert.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Wider"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/wider.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Narrower"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/narrower.gif">
+	</BUTTON>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:275;top:3">
+	<B>Standard:</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:275;top:3">
+	<SELECT ID="wmstandardimage" SIZE="1" UNSELECTABLE="on" ONCHANGE="wmStandardImageChange()">
+		<OPTION VALUE="None">None
+		<OPTION VALUE="graphics/books2.gif" >Books
+		<OPTION VALUE="graphics/globe2.gif">Globe
+		<OPTION VALUE="graphics/clock2.gif" SELECTED>Clock
+		<OPTION VALUE="Custom">Custom
+	</SELECT>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:30;top:3">
+	<INPUT TYPE="button" VALUE="Done" ONCLICK="HideWatermarkUI()" UNSELECTABLE="on"/>
+	</SPAN>
+
+	<BR>
+
+	<SPAN STYLE="position:absolute;left:10;bottom:3">
+	<INPUT ID="backradiobutton" TYPE="Radio" NAME="page" VALUE="back" ONCLICK="InitWatermarkUI()" UNSELECTABLE="on">
+	<B>Back</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:80;bottom:3">
+	<BUTTON UNSELECTABLE="on" TITLE="Move Up"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/moveup.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Move Down"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/movedwn.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Taller"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/taller.gif">
+	</BUTTON>
+
+	<BUTTON UNSELECTABLE="on" TITLE="Shorter"
+		ONMOUSEDOWN="this.className='buttonDown';DoTimeOut()"
+		ONMOUSEUP="this.className='buttonOn';UndoTimeOut()"
+		ONMOUSEOVER="this.className='buttonOn'"
+		ONMOUSEOUT="this.className='';UndoTimeOut()">
+		<IMG SRC="graphics/shorter.gif">
+	</BUTTON>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:275;bottom:3">
+	<B>Custom:</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:275;bottom:3">
+	<FORM ID="fileinputcontainer" STYLE="display:inline" UNSELECTABLE="on">
+		<INPUT id ="wmcustomimage" TYPE="file" NAME="userFile" SIZE="10" ONPROPERTYCHANGE="wmCustomImageChange()" UNSELECTABLE="on">
+	</FORM>
+	</SPAN>
+</DIV>
+
+<DIV ID="margineditui" CLASS="ui" UNSELECTABLE="on" STYLE="display:none;width:300">
+	<SPAN STYLE="position:absolute;right:160;top:3">
+	<B>Top:</B>
+	<INPUT ID="topmargininput" TYPE="text" SIZE="2" VALUE=".25" ONKEYUP="SetMargins()">
+	<B>in.</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:145;top:3">
+	<B>Sides:</B>
+	<INPUT ID="sidemargininput" TYPE="text" SIZE="2" VALUE=".25" ONKEYUP="SetMargins()">
+	<B>in.</B>
+	</SPAN>
+
+	<BR>
+
+	<SPAN STYLE="position:absolute;right:160;bottom:3">
+	<B>Bottom:</B>
+	<INPUT ID="bottommargininput" TYPE="text" SIZE="2" VALUE=".5" ONKEYUP="SetMargins()" UNSELECTABLE="on">
+	<B>in.</B>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:230;bottom:3">
+	<INPUT TYPE="button" VALUE="Done" ONCLICK="HideMarginUI()" UNSELECTABLE="on"/>
+	</SPAN>
+</DIV>
+
+<DIV ID="pageviewui" CLASS="ui" STYLE="top:5;left:710;height:65;width:155px;" UNSELECTABLE="on">
+	<SPAN STYLE="position:absolute;left:10;top:3">
+	<B>Zoom:</B>
+	<SELECT SIZE="1" UNSELECTABLE="on" ONCHANGE="var val = this.options[this.selectedIndex].value; if (val!='') {ChangeZoom(val)}">
+		<OPTION VALUE="10%">10%</OPTION>
+		<OPTION VALUE="25%">25%</OPTION>
+		<OPTION VALUE="50%">50%</OPTION>
+		<OPTION VALUE="60%">60%</OPTION>
+		<OPTION VALUE="70%">70%</OPTION>
+		<OPTION VALUE="80%">80%</OPTION>
+		<OPTION VALUE="90%" SELECTED>90%</OPTION>
+		<OPTION VALUE="100%">100%</OPTION>
+		<OPTION VALUE="150%">150%</OPTION>
+		<OPTION VALUE="200%">200%</OPTION>
+	</SELECT>
+	</SPAN>
+
+	<BR>
+
+	<SPAN STYLE="position:absolute;left:10;bottom:3">
+	<INPUT TYPE="button" VALUE="Print Preview..." ONCLICK="ShowPrintPreview()" UNSELECTABLE="on"/>
+	</SPAN>
+</DIV>
+
+
+<DIV ID="pagecontainer">
+<DIV ID="zoomcontainer">
+
+<DIV ID="frontborder" CLASS="borderstyle">
+<DIV ID="front" CLASS="pagestyle">
+	<DIV ID="watermarkfrontcontainer" STYLE="position:absolute;width:11in;height:8.5in;z-index:-1;overflow-x:hidden;overflow-y:hidden">
+		<IMG ID="watermarkfront" SRC="graphics/globe2.gif" STYLE="position:absolute;top:2in;left:3.25in;">
+	</DIV>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect1" CLASS="lorstyle">
+		<H2>Inside Page 1</H2>
+		<IMG SRC="graphics/globe1.gif" STYLE="position:static; top:300; left: 150; z-index:3;border:solid;border-width:1px;border-color:black" WIDTH="251" HEIGHT="261">
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+	</SPAN>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect2" CLASS="lorstyle">
+		<H2>Outside facing back...</H2>
+		<IMG SRC="graphics/globe1.gif" WIDTH="125" HEIGHT="130" ALIGN="right" BORDER="0">
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+	</SPAN>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect3" CLASS="lorstyle">
+		<H1>Company Name or Title</H1>
+		<IMG SRC="graphics/globe1.gif" WIDTH="251" HEIGHT="261" BORDER="0">
+	</SPAN>
+</DIV>
+</DIV>
+
+<DIV ID="backborder" CLASS="borderstyle">
+<DIV ID="back" CLASS="pagestyle">
+	<DIV ID="watermarkbackcontainer" STYLE="position:absolute;width:11in;height:8.5in;z-index:-1;overflow-x:hidden;overflow-y:hidden">
+		<IMG ID="watermarkback" SRC="graphics/books2.gif" STYLE="position:absolute;top:2in;left:2in;">
+	</DIV>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect4" CLASS="lorstyle">
+		<H2>Inside Page 2</H2>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+	</SPAN>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect5" CLASS="lorstyle">
+		<H2>Inside Page 3</H2>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+	</SPAN>
+	<SPAN CONTENTEDITABLE="true" ID="layoutrect6" CLASS="lorstyle">
+		<H2>Inside Page 4</H2>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+		<P>Here's some sample text I've provided to fill space. This Web page shows you the front and back page of a brochure and provides editable columns for each section. The section styles and the page width and height are specified in inches to correspond with letter-size paper.</P>
+	</SPAN>
+</DIV>
+</DIV>
+</DIV>
+</DIV>
+
+<P ID="copyright" STYLE="position:absolute;top:500;left:10">
+<font color="black" face="ms sans serif" size="1">&copy;<a href="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" target="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</a></font>
+</P>
+
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

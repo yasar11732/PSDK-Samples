@@ -1,0 +1,13 @@
+<Schema xmlns="urn:schemas-microsoft-com:xml-data"
+        xmlns:dt="urn:schemas-microsoft-com:datatypes">
+  <AttributeType name="ref" dt:type="idref"/>
+  <ElementType name="teacher" content="eltOnly">
+    <attribute type="ref"/>
+  </ElementType>
+  <ElementType name="class" content="eltOnly">
+    <attribute type="ref"/>
+  </ElementType>
+  <ElementType name="student" content="eltOnly">
+    <attribute type="ref"/>
+  </ElementType>
+</Schema>

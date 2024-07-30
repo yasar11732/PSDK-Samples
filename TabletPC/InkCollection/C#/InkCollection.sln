@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkCollection", "InkCollection.csproj", "{8341F910-CFD1-43A8-9A13-3AE5FE638469}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8341F910-CFD1-43A8-9A13-3AE5FE638469}.Debug.ActiveCfg = Debug|.NET
+		{8341F910-CFD1-43A8-9A13-3AE5FE638469}.Debug.Build.0 = Debug|.NET
+		{8341F910-CFD1-43A8-9A13-3AE5FE638469}.Release.ActiveCfg = Release|.NET
+		{8341F910-CFD1-43A8-9A13-3AE5FE638469}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

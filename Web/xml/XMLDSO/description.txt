@@ -1,0 +1,14 @@
+XML DSO Shape Interpreter
+
+Files:
+dsoMap.htm
+show-xml.xsl
+simple.xml
+
+Description:
+This demo displays XML as chaptered rowsets according to the heuristic 
+used by the XML Data Source Object (XML DSO) for Internet Explorer 5.0. You can use 
+this tool to interpret how the XML DSO shapes a particular XML file. 
+
+Compatibility/Platform Compatibility:
+You must be running Microsoft Internet Explorer 5 or greater on Win32 or Unix platforms to view this demo.

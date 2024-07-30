@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\factoidClient\downlevel]
+"Edit None 1000"="NONE"
+"RICHEDIT E-mail 1001"="EMAIL"
+"Edit Phone1 1002"="TELEPHONE"
+"RICHEDIT Phone2 1003"="TELEPHONE"
+"Edit Percent 1006"="PERCENT"
+"Edit Number 1004"="NUMSIMPLE"
+"Edit Currency 1005"="CURRENCY"
+"RICHEDIT Time 1008"="TIME"
+"RICHEDIT Date 1007"="DATE"
+"RICHEDIT Zip 1009"="ZIP"
+"RICHEDIT File Location 1011"="WEB|FILENAME"
+"Edit URL 1010"="WEB|WORDLIST"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\factoidClient\mru]
+"RICHEDIT File Location 1011"="Software\\Microsoft\\Microsoft Tablet PC Platform SDK\\FactReg\\filenames"
+"Edit URL 1010"="Software\\Microsoft\\Internet Explorer\\TypedURLs"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\factoidClient\mru]
+"Edit Wordlist (from registry) 1012"="Software\\Microsoft\\Microsoft Tablet PC Platform SDK\\FactReg\\wordlist"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\factoidClient\wordlist]
+"RICHEDIT Wordlist (from file) 1013"="wordlist.txt"
+

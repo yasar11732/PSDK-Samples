@@ -1,0 +1,23 @@
+HKCR
+{
+	Render.Behavior.1 = s 'Behavior Class'
+	{
+		CLSID = s '{CFDD0BBE-9906-11d3-953D-0000F804E031}'
+	}
+	Render.Behavior = s 'Behavior Class'
+	{
+		CurVer = s 'Render.Behavior.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {CFDD0BBE-9906-11d3-953D-0000F804E031} = s 'Behavior Class'
+		{
+			ProgID = s 'Render.Behavior.1'
+			VersionIndependentProgID = s 'Render.Behavior'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

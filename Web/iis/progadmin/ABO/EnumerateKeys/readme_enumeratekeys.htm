@@ -1,0 +1,177 @@
+<head>
+<title>IIS Samples - Enumerate Metabase Keys</title>
+</head>
+<body>
+
+<a name="top"></a>
+<p>
+<h2>IIS Samples - Enumerate Metabase Keys</h2>
+<a name="IIS_enumeratekeys"></a>
+
+
+<p>This C++ sample code uses the Admin Base Object (ABO) for IIS to enumerate 
+properties in the IIS metabase. The code uses the <b>IMSAdminBase</b> interface to access the properties.</p>
+
+<p><font color="blue"><b>Important</b></font> &nbsp; These samples are provided for educational purposes only. They are not 
+intended to be used in a production environment, have not been tested in a production 
+environment, and Microsoft does not provide technical support for them.
+
+<p>
+	&nbsp;</p>
+  <p>
+	<a href="#ovr">Sample Overview</a><br>
+	<a href="#req">Requirements</a><br>
+	<a href="#loc">Location of the Source Code</a><br>
+	<a href="#bld">Build and Install the Sample</a><br>
+	<a href="#run">Run the Sample</a><br>
+	<a href="#out">Sample Output</a><br>
+	<a href="#hlp">Helpdesk</a></p>
+  <p>
+	&nbsp;</p>
+  <h4><a name="ovr"></a>Sample Overview</h4>
+  <p>ABO can be used to configure IIS by altering the IIS metabase. The metabase is nothing more than a binary file 
+  on IIS versions 5.1 and previous, or an XML file on IIS 6.0. The file specifies keys that correspond to 
+  configuration settings that you can also see in the IIS Manager. By using the <b>IMSAdminBase</b> interface to 
+  add a key and set the key to a value, 
+  you essentially configure a setting in the metabase. You can also 
+  delete keys, copy keys, delete values, rename keys, and perform other tasks that amount to full control over the 
+  configuration of IIS. Note that keys can only be created and set at nodes that accept them. On IIS 6.0, you can 
+  tell what keys are accepted at a node by looking at the <i>%SystemRoot%</i>\system32\inetsrv\MBSchema.xml file.
+  </p>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="req"></a>Requirements</h4>
+  <p>This sample requires the installation of the following software to
+  function properly:</p>
+  <ul>
+	<li>Windows Server&nbsp;2003 with IIS 6.0 installed.</li>
+    <li>Windows XP Server with IIS 5.1 installed.</li>
+  </ul>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="loc"></a>Location of the Source Code</h4>
+  <p>IIS samples are included in the IIS Software Developer Kit (SDK). 
+  You can download the IIS SDK from 
+  <a href="http://go.microsoft.com/fwlink/?LinkId=7298">Platform SDK Update</a>. 
+  You can view the SDK at <a href="http://go.microsoft.com/fwlink/?LinkId=1694">MSDN Online</a>. 
+  In the table of contents at MSDN Online, click <b>Web Development</b>, <b>Server Technologies</b>, 
+  <b>Internet Information Services (IIS)</b>, <b>SDK Documentation</b>, 
+  <b>Internet Information Services</b>, <b>Samples</b>.</p>
+  <p>The following source code files are required for this sample:</p>
+  <table border="1">
+    <tr>
+      <th>File</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>EnumerateKeys.sln</td>
+      <td>EnumerateKeys Visual Studio .NET solution file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>EnumerateKeys.vcproj</td>
+      <td>EnumerateKeys Visual Studio .NET C Project file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>EnumerateKeys.dsp, EnumerateKeys.dsw</td>
+      <td>EnumerateKeys Visual Studio Version 6 project files, required to build this sample in Visual Studio Version 6.</td>
+    </tr>
+    <tr>
+      <td>EnumerateKeys.cpp</td>
+      <td>EnumerateKeys source module containing the code that implements the extension.</td>
+    </tr>
+	<tr>
+	  <td>EnumerateKeys.dep</td>
+	  <td>EnumerateKeys.dll dependency file required by the makefile.</td>
+    </tr>
+	<tr>
+	  <td>MAKEFILE</td>
+	  <td>EnumerateKeys makefile for command line compilation</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="bld"></a>Build and Install the Sample</h4>
+  <p>To build  this sample using the Visual C++ IDE, the following
+  steps must be performed:</p>
+  <ol>
+    <li>Open the solution (VS.NET) or desktop (VS6) file to open the project.</li>
+    <li>Click <b>Build</b> to create the executable.</li>
+  </ol>
+  <p>To build and run this sample without using the Visual C++ IDE, the
+  following steps must be performed:</p>
+  <ol>
+    <li>Type <b>NMAKE All</b> from the command line. For example, if your sample files are located in 
+	a folder called <code>C:\MySamples</code>, type the following at the command line:
+      <pre>cd /d c:\MySamples
+NMAKE All</pre>
+    </li>
+  </ol>
+  <p>&nbsp;</p>
+  <p>To install this sample, the following steps must be performed:</p>
+  <ol>
+  <li>Copy EnumerateKeys.exe to a physical folder on your computer. For example, 
+  create a folder called <code>C:\Samples</code> and copy  EnumerateKeys.exe to that folder.</li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="run"></a>Run the Sample</h4>
+  <p>In order to run this sample, follow the instructions listed below:</p>
+  <ol>
+    <li>Open a command line window by clicking <b>Start</b>, <b>Run</b>, type <code>cmd</code> 
+	in the text box, and click <b>OK</b>.</li>
+	<li>Change directories until you are in the same one that contains your sample script. For example, if 
+	you saved your sample script in <code>C:\Samples</code>, type the following in the command window:
+	<pre>cd /d C:\Samples</pre></li>
+	<li>Type the following to see instructions on using this script:
+	<pre>EnumerateKeys.exe</pre></li>
+	<li>To enumerate the keys of the default Web site, type the following in the command window:
+	<pre>EnumerateKeys.exe <i>&lt;computer_name&gt;</i> /LM/W3SVC/1/ROOT</pre></li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="out"></a>Sample Output</h4>
+  <p>The following example of output is displayed after you perform step 4 
+  from <b>Run the Sample</b>.</p>
+  <pre>Enumerating Path: /LM/W3SVC/1/ROOT
+[iisstart.htm]
+[IISHelp]
+[Printers]
+[aspnet_client]
+[Scripts]</pre>
+  <p>Errors like the following are also displayed:</p>
+  <pre>Enumerating Path: /LM/W3SVC/1/invalidkeyname
+EnumIndex: 1
+EnumKeys return code: 0x80070003
+the example failed with 0x80070003</pre>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="hlp"></a>Help Desk</h4>
+  <p>If here you do not find answers to your questions, visit the 
+  <a href="http://go.microsoft.com/fwlink/?linkid=1782">Microsoft Help and Support</a> 
+  Web site.</p>
+  <table border="1">
+    <tr>
+      <th>Problem</th>
+      <th>Possible Solution</th>
+    </tr>
+    <tr>
+      <td>Permission denied errors</td>
+      <td>Only administrators can run executables that use ABO. 
+To keep security risks low, log on to your computer using an account that is not in the 
+Administrators group, and then use the <b>Run As</b> 
+command to run your script or executable as an 
+administrator. From the command prompt, type <code>runas /user: <i>administrative_accountname</i> 
+"<i>executable_name</i>"</code>.</p></td>
+    </tr>
+    <tr>
+      <td>The example failed with 0x80070003</td>
+      <td>The key that you specified does not exist at that node.</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+
+<hr class="iis" size="1">
+<p align="center"><i>© 1997-2003 Microsoft Corporation. All rights reserved.</i></p>
+
+</body>
+</html>

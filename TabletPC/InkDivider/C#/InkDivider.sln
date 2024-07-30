@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkDivider", "InkDivider.csproj", "{4E91013D-4B17-4D25-8227-7B10AA2F5883}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4E91013D-4B17-4D25-8227-7B10AA2F5883}.Debug.ActiveCfg = Debug|.NET
+		{4E91013D-4B17-4D25-8227-7B10AA2F5883}.Debug.Build.0 = Debug|.NET
+		{4E91013D-4B17-4D25-8227-7B10AA2F5883}.Release.ActiveCfg = Release|.NET
+		{4E91013D-4B17-4D25-8227-7B10AA2F5883}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

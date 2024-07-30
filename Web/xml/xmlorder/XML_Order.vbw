@@ -1,0 +1,14 @@
+frmOrder = -4, 20, 749, 457, C, 6, 128, 553, 565, C
+frmLogin = 111, 118, 742, 607, C, 110, 110, 741, 599, C
+frmCustomers = 31, 124, 614, 613, C, 198, 198, 781, 687, C
+frmMDIMain = 149, 83, 502, 435, C, 110, 110, 544, 423, C
+CUsersDB = 0, 0, 525, 440, C
+modConstants = 22, 22, 547, 462, C
+modXMLFile = 66, 66, 591, 506, C
+CLogDB = 110, 110, 909, 858, C
+CCustomersDB = 286, 286, 1085, 1034, C
+COrdersDB = 22, 22, 787, 770, C
+CCustomerData = 44, 44, 809, 792, C
+CProductsDB = 66, 66, 831, 814, C
+CProductData = 88, 88, 853, 836, C
+COrderItemsDB = 66, 66, 831, 814, C

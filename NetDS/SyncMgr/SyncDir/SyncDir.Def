@@ -1,0 +1,11 @@
+ ; syncdir.def : Declares the module parameters for the DLL.
+ ; Copyright 1998 - 1999 Microsoft Corporation.  All Rights Reserved.
+
+LIBRARY      syncdir
+
+EXPORTS
+     DllCanUnloadNow                 PRIVATE            ;DLL unloading
+     DllGetClassObject               PRIVATE            ;Component object model
+     DllRegisterServer               PRIVATE
+     DllUnregisterServer             PRIVATE
+    

@@ -1,0 +1,80 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// Render.idl : IDL source for Render.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Render.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+	
+		uuid(CFDD0BC0-9906-11d3-953D-0000F804E031),
+	
+		helpstring("IFactory Interface"),
+		pointer_default(unique)
+	]
+	interface IFactory : IUnknown
+	{
+	};
+	[
+	
+		uuid(CFDD0BC1-9906-11d3-953D-0000F804E031),
+	
+		helpstring("IBehavior Interface"),
+		pointer_default(unique)
+	]
+	interface IBehavior : IDispatch
+	{
+	};
+	[
+		object,
+		uuid(CFDD0BC2-9906-11d3-953D-0000F804E031),
+		dual,
+		helpstring("IEventSink Interface"),
+		pointer_default(unique)
+	]
+	interface IEventSink : IDispatch
+	{
+	};
+[
+	uuid(CFDD0BC3-9906-11d3-953D-0000F804E031),
+	version(1.0),
+	helpstring("Render 1.0 Type Library")
+]
+
+
+library RENDERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(CFDD0BBD-9906-11d3-953D-0000F804E031),
+		helpstring("Factory Class")
+	]
+	coclass Factory
+	{
+		[default] interface IFactory;
+	};
+	[
+		uuid(CFDD0BBE-9906-11d3-953D-0000F804E031),
+		helpstring("Behavior Class")
+	]
+	coclass Behavior
+	{
+		[default] interface IBehavior;
+	};
+	[
+		uuid(CFDD0BBF-9906-11d3-953D-0000F804E031),
+		helpstring("EventSink Class")
+	]
+	coclass EventSink
+	{
+		[default] interface IEventSink;
+	};
+};

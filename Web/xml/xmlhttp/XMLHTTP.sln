@@ -1,0 +1,18 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{BDD4A1A1-7A1F-11D0-AC13-00A0C91E29D5}") = "gretzky/XMLHTTP", "XMLHTTP.vip", "{B71EE999-457E-4996-A0A8-D734B709E942}"
+	ProjectSection(SourceCodeControl) = preProject
+		SccAuxPath = 
+		WebServer = http://gretzky
+		WebName = XMLHTTP
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {B71EE999-457E-4996-A0A8-D734B709E942}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {B71EE999-457E-4996-A0A8-D734B709E942}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

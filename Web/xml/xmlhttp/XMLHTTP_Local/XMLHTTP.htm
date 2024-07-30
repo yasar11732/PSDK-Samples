@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>Retrieve XML-marshaled ADO recordset without unloading current page</title>
+<LINK rel="stylesheet" type="text/css" href="global.css">
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<P>This sample application allows you to enter a database server name, a
+   database name as well as a SQL statement which will be executed and
+   returned to you in an XML representation. This sample will generate 
+   override the default behavior of the HTML &lt;form&gt; element and will
+   generate an XML-based request that will be passed to the ASP page for
+   subequent processing.</p>
+
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+
+  function frmQuery_onclick() {
+
+	// Make sure that it was a click on the submit button that triggers this action
+	if( event.srcElement.type == "submit" ) {
+	
+		// Convert the input parameters into the appropriate XML string
+		var strRequestXML = "<request><computer>" + frmQuery.txtComputer.value + "</computer>";
+		strRequestXML += "<database>" + frmQuery.txtDatabase.value + "</database>";
+		strRequestXML += "<sql><![CDATA[" + frmQuery.txtSQL.value + "]]></sql></request>";
+
+		// Show the request XML
+		divOutputRequest.innerText = strRequestXML;
+			
+		// Create an instance of the XML HTTP Request object
+		var objXMLReq = new ActiveXObject( "Microsoft.XMLHTTP" );
+	
+		// Prepare the XMLHTTP Request object to issue a synchronous HTTP POST 
+		// request to the URL specified by the <form> action attribute
+		objXMLReq.open( "POST", frmQuery.action, false );
+
+		// Execute the HTTP POST request, passing strRequestXML as the request body
+		objXMLReq.send( strRequestXML );
+
+		// Drop the returned XML into our <div> output element
+		divOutputResponse.innerText = objXMLReq.responseText;
+						
+		// Cancel the default action of the <form> element
+		return false;
+	}
+  }
+
+</SCRIPT>
+
+<!-- This is the HTML form that will be used to gather up the parameters to	
+	 pass to the ASP page as part of an HTTP POST request. If you want to try
+	 the VBScript version of the server side code, change the action attribute
+	 of the <form> element from runQueryJ.asp to runQuery.asp -->
+	 
+<FORM action="runQueryJ.asp" method="post" id="frmQuery" language=JavaScript onclick="return frmQuery_onclick()">
+  <LABEL>Computer name:</LABEL><INPUT type="text" id="txtComputer" name="txtComputer" maxLength="50"><BR>
+  <LABEL>Database name:</LABEL><INPUT type="text" id="txtDatabase" name="txtDatabase" maxLength="20"><BR>
+  <LABEL>SQL statement:</LABEL><INPUT type="text" id="txtSQL" name="txtSQL" maxLength="200"><BR>
+
+  <INPUT type="submit" value="Submit" id=btnSubmit>
+</FORM>
+
+<!-- This is the outut <DIV> element that we'll use to hold the output -->
+
+<P>Request XML:</P>
+<DIV id=divOutputRequest></DIV>
+<P>Response XML:</P>
+<DIV id=divOutputResponse></DIV>
+
+</BODY>
+</HTML>

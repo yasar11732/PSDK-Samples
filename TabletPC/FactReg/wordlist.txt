@@ -1,0 +1,6 @@
+John Doe
+johndoe123@somemail.com
+(555) 123-4567
+01/23/45
+C:\\Documents and Settings\\Default User\\JohnDoe.jpg
+http://www.johndoe.com

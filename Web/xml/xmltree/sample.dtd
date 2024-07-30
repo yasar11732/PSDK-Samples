@@ -1,0 +1,8 @@
+<!-- this is a simple DTD that describes the sample XML tags -->
+
+<!ELEMENT description (#PCDATA | foo)*>
+<!ELEMENT foo (#PCDATA)>
+<!ELEMENT dsig (#PCDATA)>
+<!ATTLIST dsig value CDATA #IMPLIED>
+<!ATTLIST dsig crypt CDATA "128">
+<!ENTITY bar SYSTEM "sample.ent">

@@ -1,0 +1,13 @@
+[Version]
+signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[Add.Code]
+EDAnnotator.dll=EDAnnotator.dll
+
+[EDAnnotator.dll]
+file-win32-x86=thiscab
+RegisterServer=yes
+CLSID={9790C4C2-7BFF-49C1-9439-068EE3B8DC22}
+DestDir=
+FileVersion=1,0,0,0

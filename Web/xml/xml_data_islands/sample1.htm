@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>Using Internet Explorer 5 Data Islands</TITLE>
+<LINK rel="stylesheet" type="text/css" href="global.css">
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H2>XML Data Islands</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>Click on either the American or National buttons to display the list
+   of American League or National League All-Star game starters and their votes.</P>
+
+<!-- This is the XML data island that is used to retrieve the data -->
+
+<XML ID=xmlData></XML>
+
+<SCRIPT LANGUAGE=JavaScript>
+
+// Helper function that generates an HTML <TABLE> element to display the list of players
+
+function generateHTML( objParser ) {
+
+	var strHTML = "<TABLE><THEAD><TH>Name</TH><TH>Team</TH><TH>Position</TH><TH>Votes</TH></THEAD><TBODY>";
+	
+	// Use the Extensible Query Language (XQL) syntax to retrieve the list of <player>
+	// nodes from the XML Parser
+	var collPlayers = objParser.selectNodes( "//player" );
+		
+	// Walk the list of <player> nodes to generate the appropriate HTML
+	for( var i = 0; i < collPlayers.length; i++ ) {
+
+		strHTML += "<TR>";
+		strHTML += "<TH>" + collPlayers.item( i ).selectSingleNode( "name" ).text + "</TH>";
+		strHTML += "<TD>" + collPlayers.item( i ).selectSingleNode( "team" ).text + "</TD>";		
+		strHTML += "<TD>" + collPlayers.item( i ).selectSingleNode( "position" ).text + "</TD>";		
+		strHTML += "<TD>" + collPlayers.item( i ).selectSingleNode( "votes" ).text + "</TD>";
+		strHTML += "</TR>";
+	}
+	
+	strHTML += "</TBODY></TABLE>";
+	return strHTML;
+}
+
+// Event handler that handles the click event of the INPUT elements within the 
+// spanButtons HTML element.
+function spanButtons_onclick() {
+
+	if( event.srcElement.tagName == "INPUT" ) {
+	
+		// Retrieve the click event's source element
+		var objElement = event.srcElement;
+	
+		// Instruct the XML data island to use synchronous data transfer
+		xmlData.async = false;
+	
+		// Set the src property of the XML data island to the path property of the
+		// source INPUT element
+		xmlData.src = objElement.path;
+
+		// Call the generateHTML helper function to convert the contents of the XML
+		// parser object into HTML that we will use to render for display	
+		divOutput.innerHTML = generateHTML( xmlData );
+	}
+}
+
+</SCRIPT>
+     
+<!-- We use DHTML event bubbling here to handle the button's click events -->
+
+<SPAN ID=spanButtons LANGUAGE=JavaScript onclick="return spanButtons_onclick()">
+
+<!-- We use a custom property called 'path' to hold the path to the file containing
+     the data -->
+     
+<INPUT TYPE=button VALUE="American" path="american_allstars.xml">
+<INPUT TYPE=button VALUE="National" path="national_allstars.xml">
+
+</SPAN>
+
+<!-- This is the DIV element that we will use to store the generated HTML -->
+
+<DIV ID=divOutput></DIV>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

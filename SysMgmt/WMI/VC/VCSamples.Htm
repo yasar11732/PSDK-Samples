@@ -1,0 +1,923 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Draft//EN">
+<!- Copyright (c)  Microsoft Corporation, All Rights Reserved ->
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+	
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="VCSamples_files/filelist.xml">
+<title>WMI SDK Samples Readme</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Michael Maston</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Zina Pozen</o:LastAuthor>
+  <o:Revision>19</o:Revision>
+  <o:TotalTime>1713</o:TotalTime>
+  <o:Created>1999-01-28T19:11:00Z</o:Created>
+  <o:LastSaved>2002-05-03T21:11:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>937</o:Words>
+  <o:Characters>5344</o:Characters>
+  <o:Company>Microsoft</o:Company>
+  <o:Lines>44</o:Lines>
+  <o:Paragraphs>12</o:Paragraphs>
+  <o:CharactersWithSpaces>6269</o:CharactersWithSpaces>
+  <o:Version>10.3501</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-alt:"?? ??";
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:1471289767;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1956236998 631828248 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-tab-stop:63.0pt;
+	mso-level-number-position:left;
+	margin-left:63.0pt;
+	text-indent:-45.0pt;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+<meta name=MS-HAID content=VJsamples>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+	
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width=160 style='width:120.0pt;background:#330099;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:white'>&nbsp;<nobr><b>Windows Management Instrumentation SDK Samples</b></span>
+  <o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText>&nbsp;</p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>The samples contained
+within this directory are intended to demonstrate the concepts of building Windows
+Management Instrumentation (WMI) applications and providers using Microsoft
+Visual C++.<span style='mso-spacerun:yes'>  </span>Examples of property,
+method, instance and event providers as well as consumer applications for
+various types of provider information are included.<span
+style='mso-spacerun:yes'>  </span>In addition, a simple provider based on the
+WMI Provider Framework is presented to streamline and simplify the process of
+building your own provider.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>A list of the samples
+and a brief description of their purpose is provided below.<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Provider Samples<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=191 valign=top style='width:143.6pt;border:solid windowtext 1.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Sample Name<o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border:solid windowtext 1.5pt;
+  border-left:none;mso-border-left-alt:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Description<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;height:13.5pt'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt;
+  height:13.5pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>ClassProv</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt;height:13.5pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a WMI
+  class provider.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:windowtext'>Decoupled\<span class=SpellE>Event_Provider</span></span><span
+  style='color:windowtext'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a
+  decoupled event provider. During&nbsp;its lifetime, the provider generates
+  events, which can be collected by Decoupled\<span class=SpellE>Event_Consumer</span>
+  sample application.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:windowtext'>Decoupled\<span class=SpellE>Instance_Provider</span></span><span
+  style='color:windowtext'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a
+  decoupled instance provider.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>EventProvider</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of an
+  event provider.<span style='mso-spacerun:yes'>  </span>The provider generates
+  periodic events, which can be collected by the <span class=SpellE>TempConsumer</span>
+  client application.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>FrameworkProv</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of an
+  instance provider built on the WMI Provider Framework.<span yes>&nbsp; </span>The
+  sample code supports enumeration, retrieval, put and delete.<span yes>&nbsp;</span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>HiPerfProvider</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a
+  provider that uses the high performance API.<span style='mso-spacerun:yes'> 
+  </span>This provider can be used in conjunction with the <span class=SpellE>HiPerfClient</span>
+  sample.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>InstProv</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a basic
+  instance provider.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>MethProv</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a basic
+  methods provider.<span style='mso-spacerun:yes'>  </span>This provider can be
+  used in conjunction with the <span class=SpellE>MethCli</span> sample client
+  application.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9;mso-yfti-lastrow:yes'>
+  <td width=191 valign=top style='width:143.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 1.5pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>PropProv</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 1.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An example of a basic
+  property provider.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Client Samples<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=198 valign=top style='width:148.8pt;border:solid windowtext 1.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Sample Name<o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border:solid windowtext 1.5pt;
+  border-left:none;mso-border-left-alt:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Description<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Client<o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An MFC-based sample
+  client that demonstrates many useful operations a typical WMI client
+  application might perform.<span style='mso-spacerun:yes'>  </span>Concepts such
+  as connecting to CIMOM, retrieving instances of the Win32 provider classes,
+  creating new namespaces and user classes and adding temporary and permanent
+  event consumer are demonstrated.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>CmdLineConsumer</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>A simple event
+  consumer that looks for instance creation events.<span
+  style='mso-spacerun:yes'>  </span>If an instance creation event is received,
+  the sample launches a user-specific application (Windows Notepad, by
+  default).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>CustomViews</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This sample
+  demonstrates how to use the Custom View <span class=SpellE>OCX’s</span>
+  controls used by the WMI SDK applications to get custom views of information
+  available via WMI.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:windowtext'>Decoupled\<span class=SpellE>Event_Consumer</span></span><span
+  style='color:windowtext'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>An event consumer
+  provider that collects events generated by Decoupled\<span class=SpellE>Event_Provider</span>.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>EventConsumer</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>The <span
+  class=SpellE>EventConsumer</span> sample is an example of an event consumer provider.<span
+  style='mso-spacerun:yes'>  </span>This provider implements the <span
+  class=SpellE>IWBEMEventConsumerProvider</span>.<span
+  style='mso-spacerun:yes'>  </span>The sample also includes the event consumer
+  that is returned by the even consumer provider.<span
+  style='mso-spacerun:yes'>  </span>The event consumer demonstrates the
+  implementation of the <span class=SpellE>IWBEMUnboundObjectSink</span>
+  interface which actually consumes WMI events.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>HiPerfClient</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This sample
+  demonstrates a client that makes use of the WMI high performance API.<span
+  style='mso-spacerun:yes'>  </span>This client should be used in conjunction
+  with the <span class=SpellE>HiPerfProvider</span> sample provider.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>MethCli</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This sample
+  demonstrates a client for a method provider.<span style='mso-spacerun:yes'> 
+  </span>This client can be used in conjunction with the <span class=SpellE>MethProv</span>
+  sample provider.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>SimpleClient</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>The <span
+  class=SpellE>SimpleClient</span> sample code is meant to accompany the
+  tutorial article &quot;Creating a WMI Application in MFC&quot;.<span yes>&nbsp;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9;mso-yfti-lastrow:yes'>
+  <td width=198 valign=top style='width:148.8pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>TempConsumer</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>The <span
+  class=SpellE>TempConsumer</span> sample demonstrates a temporary asynchronous
+  event consumer application.<span yes>&nbsp; </span><span class=SpellE>TempConsumer</span>
+  consumes events produced by the provider in the <span class=SpellE>EventProvider</span>
+  WMI SDK sample.<span yes><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Other Samples<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=191 valign=top style='width:143.6pt;border:solid windowtext 1.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Sample Name<o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border:solid windowtext 1.5pt;
+  border-left:none;mso-border-left-alt:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Description<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>PathParser</span></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This sample
+  demonstrates using the path parser COM object. </span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>QueryParser</span></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This sample
+  demonstrates using the query parser COM object. </span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>Security</span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>This&nbsp;sample
+  demonstrates the basics of how set the security on interface <span
+  class=SpellE>proxys</span>.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td width=191 valign=top style='width:143.6pt;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:solid windowtext 1.5pt;border-right:
+  solid windowtext 1.0pt;mso-border-top-alt:solid windowtext 1.5pt;mso-border-top-alt:
+  1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;mso-border-right-alt:
+  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana'>UtilLib</span></span><span
+  style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=399 valign=top style='width:299.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:1.5pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:1.5pt;
+  mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
+  solid;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana'>The <span
+  class=SpellE>UtilLib</span> sample library is a collection of useful routines
+  used by some of the samples applications and that can be used in general for
+  building WMI applications.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><strong><span style='font-family:Verdana;font-weight:normal'>General
+Notes</span></strong><strong><span style='font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal list .5in><strong><span style='font-family:Verdana;
+font-weight:normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoPlainText list .5in><span MS Mincho Times New Roman><span
+style='font-family:Verdana'>Things to remember when you're building your own WMI
+client applications and providers:</span><o:p></o:p></p>
+
+</span>
+
+<p class=MsoPlainText list .5in><span MS Mincho Times New Roman><span
+style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>If you want
+your client to run on NT and non-DCOM versions of Windows 95, manually load the
+ole32.dll and see if <span class=SpellE>CoInitializeSecurity</span>() exists.
+This routine won’t exist on Windows 95 installations that don’t have DCOM
+installed separately. If this routine doesn't exist, the asynchronous routines
+in this sample won’t work because of mismatched security level problems. The
+synchronous techniques will still work.<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1750px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>If you don’t
+care about non-DCOM versions of Windows 95, you can define<span yes>&nbsp; _</span>WIN32_DCOM
+so that <span class=SpellE>CoInitializeSecurity</span>() is available for
+implicit linking. Don't use _WIN32_WINNT to get this prototype since it won't
+compile under the Windows 95/98 operating systems.<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1814px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>In any case,
+the <span class=SpellE>CoInitializeSecurity</span>() call (in <span
+class=SpellE>InitInstance</span>()) is required to work around a security
+problem when WMI trying to call a Sink object but won't identify itself. The <span
+class=SpellE>CoInitializeSecurity</span>() call turns off the authentication
+requirement. <o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1878px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>WMI interfaces
+are defined in <span class=SpellE>wbemcli.h</span> and <span class=SpellE>wbemprov.h</span>
+found in the <span class=SpellE>wbem</span>\include directory.<span yes>&nbsp; </span>You
+may #include both these files by including just <span class=SpellE>wbemidl.h</span>
+located in the same directory.<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1926px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>WMI interface <span
+class=SpellE>CLSIDs</span> are defined in <span class=SpellE>wbemuuid.lib</span>.
+If you get unresolved externals in interfaces and <span class=SpellE>CLSIDs</span>,
+this is what is missing. <o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1958px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>You'll need to
+link with oleaut32.lib and ole32.lib to get the needed COM support.<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:-30.0pt;left:0px;position:absolute;
+top:1990px' list .5in><span MS Mincho Times New Roman><span style='font-family:
+Verdana'>&nbsp;<o:p></o:p></span></p>
+
+</span>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt' l1 level1 lfo3 list .25in .5in><span
+MS Mincho><![if !supportLists]><span style='font-family:Verdana;mso-fareast-font-family:
+Verdana;mso-bidi-font-family:Verdana'><span style='mso-list:Ignore'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>In the <span
+class=SpellE>Link|Output</span> settings, specify '<span class=SpellE>wWinMainCRTStartup</span>'
+as the entry point. This is per the Unicode programming instructions.</span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho"'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt'><![if !supportLists]><span
+style='font-family:Verdana;mso-fareast-font-family:Verdana;mso-bidi-font-family:
+Verdana'><span style='mso-list:Ignore'>8.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho"'>If you're using the <span class=SpellE>makefiles</span>, don't
+forget to set the Visual C++ environment variables. This is done by running
+VCVARS32.BAT.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:45.0pt;text-indent:-45.0pt;mso-list:
+l0 level1 lfo2;tab-stops:list 45.0pt 63.0pt'><![if !supportLists]><span
+style='font-family:Verdana;mso-fareast-font-family:Verdana;mso-bidi-font-family:
+Verdana'><span style='mso-list:Ignore'>9.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana'>You may get
+errors attempting to build or run Unicode configurations of the MFC-based
+samples.<span style='mso-spacerun:yes'>  </span>The Unicode versions of the MFC
+libraries are not copied to your hard drive unless you select them during a
+Custom installation of VC++. They are not copied during other types of
+installation. To copy the files to your hard drive, rerun Setup, choose Custom
+installation, clear the check boxes for all other components except
+&quot;Microsoft Foundation Class Libraries,&quot; click the Details button, and
+select both &quot;Static Library for Unicode&quot; and &quot;Shared Library for
+Unicode.&quot; <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+</span></div>
+
+</body>
+
+</html>

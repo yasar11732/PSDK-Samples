@@ -1,0 +1,28 @@
+XML Tree Viewer
+
+Files:
+resource.h
+sample.xml
+sample.xsl
+StdAfx.cpp
+StdAfx.h
+XMLTree.aps
+XMLTree.cpp
+XMLTree.dsp
+XMLTree.dsw
+XMLTree.exe
+XMLTree.h
+XMLTree.rc
+XMLTreeDlg.cpp
+XMLTreeDlg.h
+res/bitmap1.bmp
+res/XMLTree.ico
+res/XMLTree.rc2
+
+Description:
+This is simple MFC C++ application that populates a Tree Control from a loaded XML Document. The user can then navigate the XML document by expanding and collapsing nodes of the tree. 
+
+This sample was adapted from original source code from Soo-Young Oh (syoh@t2000.co.kr). 
+
+Compatibility/Platform Compatibility:
+The executable xmltree.exe is a standalone MFC application that requires no other installation.

@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Downloads</TITLE>
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+
+<XML id=xmlid></XML>
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666" STYLE="font:12pt Verdana,sans-serif">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Class Schedule</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<P STYLE="font-size:10pt; font-style:italic">This sample demonstrates navigation of an XML
+data set representing classes and students linked by ID.  Click on the student name to see 
+which courses they are enrolled in, and click on a course name to see the details of that
+course.</P>
+<P><B>TITLE:  </B>
+  <DIV ID=classTitle></DIV></P>
+<P><B>CLASS ID:  </B>
+  <DIV ID=classID></DIV></P>
+<P><B>TEACHER:  </B>
+  <DIV ID=teacher></DIV></P>
+<P><B>STUDENTS:  </B>
+ <TABLE>
+    <TR><TD><DIV ID=studentTable></DIV></TD>
+        <TD><DIV ID=detailsTable></DIV></TD></TR>
+ </TABLE>
+</P>
+<SCRIPT>
+//load the data and fill the page with that data
+xmlid.async=false;
+xmlid.load("schedule.xml");
+getClass();
+
+//get the first class node
+function getClass(){
+  var root = xmlid.documentElement;
+  var firstClass = root.childNodes.item(0).childNodes.item(0);
+  getData(firstClass);
+  }
+
+//get the data for the desired class element
+function getData(presClass){
+  var studentNode, studentRef,studentName;
+  var teachRef = presClass.childNodes.item(1).getAttribute('ref');
+  var teachNode = xmlid.nodeFromID(teachRef);
+
+  classTitle.innerText = presClass.childNodes.item(0).text;
+  classID.innerText = presClass.getAttribute('id');
+  teacher.innerText = teachNode.childNodes.item(0).text;
+
+  var studentRefs = presClass.childNodes.item(2).childNodes;
+  var tableStr = "<TABLE>";
+  for (var i=0;i<presClass.childNodes.item(2).childNodes.length;i++){
+    studentRef = studentRefs.item(i).getAttribute('ref');
+    studentNode =  xmlid.nodeFromID(studentRef);
+    studentName =  studentNode.childNodes.item(0).text;
+    tableStr += "<TR><TD><SPAN style='cursor:hand; text-decoration:underline' ID=" + studentRef + " onclick=getStudentInfo()>" + studentName + "</SPAN></TD></TR>";
+    }
+  tableStr += "</TABLE>";
+  studentTable.innerHTML = tableStr;
+  }
+
+
+//get the info for the chosen student
+function getStudentInfo(){
+  var student = xmlid.nodeFromID(event.srcElement.id);
+  var studentStr = "<TABLE BORDER><THEAD><TH>CLASSES for " + student.selectSingleNode("name").text + "</TH></THEAD>";
+  var classRefs = student.childNodes.item(3).childNodes;
+  var classRef, classNode, classTitle;
+  for (var j=0;j<classRefs.length;j++){
+    classRef = classRefs.item(j).getAttribute('ref');
+    classNode = xmlid.nodeFromID(classRef);
+    classTitle = classNode.childNodes.item(0).text;
+    studentStr += "<TR><TD><SPAN style='cursor:hand; text-decoration:underline' ID=" + classRef + " onclick=getNewClass()>" + classTitle + "</SPAN></TR></TD>";
+    }
+  studentStr += "</TABLE>";
+  detailsTable.innerHTML = studentStr;
+  }
+
+//display a new class element
+function getNewClass(){
+  var newClass = xmlid.nodeFromID(event.srcElement.id);
+  getData(newClass);
+  }
+</SCRIPT>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" 
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+  
+</BODY>
+</HTML>

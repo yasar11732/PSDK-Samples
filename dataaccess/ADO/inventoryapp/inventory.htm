@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+<TITLE>ADO 2.7 Samples</TITLE>
+</HEAD>
+<BODY>
+<LINK REL="STYLESHEET" HREF="..\ADOStyle.css">
+
+
+<H2>ADO 3-tier Inventory Sample</H2>
+
+<H3>Sample Overview</H3>
+<PRE>
+
+The 3 Tier sample demonstrates using ADO within a 3-tier
+environment.  This sample provides a simple interface to view,
+edit, delete and add products within the Northwind database. The
+sample is comprised of ASP pages along with a Visual Basic
+business object which encapsulates the associated calls needed
+into the database.  Additionally the sample demonstrates some of
+the new XML features provided with the SQL Server 2000. In order
+to use the XML functionality you will need SQL Server 2000 or
+MSDE 2000.
+
+This sample at a minimum will require, 
+
+    Visual Basic    --  To compile the business object
+    IIS or PWS      --  To setup the virtual directory 
+    SQL Server      --  For the northwind database.
+                        Optionally SQL Server 2000 for the XML
+                        features and functionality 
+    MDAC 2.7        --  To test the XML/SQL 2000 functionality                        
+
+
+NOTE: The XML ISAPI dll needed for the XML features is not
+      supported on Win9x machines.
+
+NOTE: As this program is a sample application and it primarily
+      uses product table within the Northwind database.  You
+      should be aware most all the existing records in the
+      product table are part of a primary/foriegn keys
+      relationship.  Therefore attempting to delete an existing
+      product will result in an error.  It is left for you as an
+      exercise to perform the delete when such a relationship
+      exists between two records.
+      
+NOTE: This sample provides a simple example for building a
+      three-tier a sample application.  It is left to the user
+      to build in data validation.  Simple edits such as the
+      lenth of the data a user may neter is checked but nothing
+      else..  It is left to the user to validate non-numeric
+      data is enterd in numeric fields.
+
+Prerequisites for using this sample:
+-----------------------------------
+Knowlege of ASP and HTML.
+Compiling a Visual Basic DLL and registering within MTS/COM+ 1.0.
+Creating and configuring a Virtual Root for SQL Server 2000's 
+XML features.
+</PRE>
+
+
+<H3>Setup</H3>
+<PRE>
+
+The first step to run this sample is to compile the business
+object used. The source for the DLL is located within the
+InventoryApp directory.  Open the InventoryApp project and
+locate the following routine shown below, you need to modify it
+to match your environment.
+
+Public Function GetConnectionString() As String
+    GetConnectionString = "Provider=SQLOLEDB;Data Source=" & _
+    "<SERVERNAME>;Initial Catalog=Northwind;Uid=<USERNAME>;" & _
+    "pwd=<PASSWORD>;"
+End Function
+
+Modify the connection string for your <SERVERNAME>, <USERNAME>,
+and <PASSWORD>.  Currently the project references ADO 2.7, you
+may need to change this to your specific setup.  While MDAC 2.7
+or greater is required to use the XML functionality provided
+with SQL Server 2000.  The sample will work with MDAC 2.6 and
+prior versions.  Once the correct setting for your environment
+have been specified, compile the dll.  After the dll has been
+compiled you must register the DLL within MTS/COM+ 1.0. You may
+do this by creating  an MTS/COM+ 1.0 package.  It is recomended
+you call MTS package "InventoryApp" and add the InventoryApp.dll
+within it.  Additionally, make sure the security and permission
+are set accordingly for the package.
+
+The business object (InventoryApp.dll) will make use of a few
+stored procedures.  All the stored procedures needed are
+contained within the file "3tier.sql".  You need to open and run
+this sql script withing SQL Server's Query Analyzer. Make sure
+you select the Northwind database before creating the stored
+procedures.
+
+The next step in the process is to create a virtual directory
+for the sample application.  For this sample, we assume you have
+named the virtual directory "InventoryDB".  Once you've created
+the virtual directory you should copy the ASP files into the
+directory specified for the InventoryDB virtual directory.
+
+For the XML functionality you will need to setup a virtual
+directory for the "Template" virtual directory.  For this sample
+we assume you have a virtual directory for Northwind called
+"VirtualRoot" and are using Template and Schema as the alias
+names for the respective directories.  The SQL IIS integration
+for SQL Server's virtual directory should be set up only by
+using the "Configure SQL XML support in IIS" utility.  Refer to
+SQL Books Online for more details.  After the directory has been
+created and setup from within  the SQL XML IIS utility, you
+should copy both the product.xml and product.xsl to the template
+directory.
+                  
+
+Summary/Checklist:
+-----------------
+
+Compile the VB business object and create the associated MTS
+    package for InventoryDb.
+    
+Load the stored procedures into your Northwind database.    
+
+Create the virtual directory for the InventoryDb within IIS.
+
+Create the virtual diretory needed for the SQL XML intetgration
+    with the SQL IIS XML Configuration utility (XML features only).
+    
+Copy the ASP files to the virtual directory for the InventoryDb site.
+
+
+Troubleshooting:
+----------------
+
+If either the dll is not built with the correct user id and/or
+password, nor registered within MTS correctly the sample will
+fail to run when attempting to perform any of the update
+operation.  Additionally if the sql script failed to run
+correctly you will alos get errors when running this sample.  To
+isolate where the problem is you it is recomended you run Query
+Analyzer and verify each of the stored procedures run correctly.
+This will show if stored procdures or the settings in the
+InventoryApp.dll are not correct.
+                                        
+
+
+</PRE>
+
+</BODY>
+</HTML>

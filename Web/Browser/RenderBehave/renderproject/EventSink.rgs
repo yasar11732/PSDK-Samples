@@ -1,0 +1,25 @@
+HKCR
+{
+	EventSink.EventSink.1 = s 'EventSink Class'
+	{
+		CLSID = s '{CFDD0BBF-9906-11d3-953D-0000F804E031}'
+	}
+	EventSink.EventSink = s 'EventSink Class'
+	{
+		CurVer = s 'EventSink.EventSink.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {CFDD0BBF-9906-11d3-953D-0000F804E031} = s 'EventSink Class'
+		{
+			ProgID = s 'EventSink.EventSink.1'
+			VersionIndependentProgID = s 'EventSink.EventSink'
+			ForceRemove 'Programmable'
+
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

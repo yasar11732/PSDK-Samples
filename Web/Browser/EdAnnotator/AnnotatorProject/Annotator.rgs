@@ -1,0 +1,33 @@
+HKCR
+{
+	EDAnnotator.Annotator.1 = s 'Annotator Class'
+	{
+		CLSID = s '{9790C4C2-7BFF-49C1-9439-068EE3B8DC22}'
+	}
+	EDAnnotator.Annotator = s 'Annotator Class'
+	{
+		CLSID = s '{9790C4C2-7BFF-49C1-9439-068EE3B8DC22}'
+		CurVer = s 'EDAnnotator.Annotator.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9790C4C2-7BFF-49C1-9439-068EE3B8DC22} = s 'Annotator Class'
+		{
+			ProgID = s 'EDAnnotator.Annotator.1'
+			VersionIndependentProgID = s 'EDAnnotator.Annotator'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			ForceRemove 'Control'
+			ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 101'
+			'MiscStatus' = s '0'
+			{
+			    '1' = s '131473'
+			}
+			'TypeLib' = s '{2486B506-7D8E-4D43-A94B-CDF663E8F5FC}'
+			'Version' = s '1.0'
+		}
+	}
+}

@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TPCInfo", "TPCInfo.vcproj", "{855DB6A3-E699-4D80-8196-3A2C9820B922}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{855DB6A3-E699-4D80-8196-3A2C9820B922}.Debug.ActiveCfg = Debug|Win32
+		{855DB6A3-E699-4D80-8196-3A2C9820B922}.Debug.Build.0 = Debug|Win32
+		{855DB6A3-E699-4D80-8196-3A2C9820B922}.Release.ActiveCfg = Release|Win32
+		{855DB6A3-E699-4D80-8196-3A2C9820B922}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

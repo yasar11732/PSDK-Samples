@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// EdCommands.idl : IDL source for EdCommands.dll
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EdCommands.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(CED48A59-F923-43E7-BBF0-96952F455236),
+		dual,
+		helpstring("IBrowserHost Interface"),
+		pointer_default(unique)
+	]
+	interface IBrowserHost : IDispatch
+	{
+		HRESULT Run();
+		HRESULT Stop();
+	};
+	
+[
+	uuid(2C7F2F94-CF6F-4C27-A86D-2C51A9EE9AAF),
+	version(1.0),
+	helpstring("EdCommands 1.0 Type Library")
+]
+library EDCOMMANDSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(3B30D67E-F866-4126-8470-7D4D27CD7217),
+		helpstring("BrowserHost Class")
+	]
+	coclass BrowserHost
+	{
+		[default] interface IBrowserHost;
+	};
+};

@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{6E8B7442-D976-4B76-A345-0F6BF91E0F9B} = s 'EdCommands'
+		'EdCommands.EXE'
+		{
+			val AppID = s {6E8B7442-D976-4B76-A345-0F6BF91E0F9B}
+		}
+	}
+}

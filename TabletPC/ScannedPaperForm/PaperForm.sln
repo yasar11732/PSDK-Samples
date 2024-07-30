@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperForm", "PaperForm.csproj", "{73482900-37CC-42A7-976B-8CB097593360}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CopyFormData", "CopyFormData.vcproj", "{A326B3AE-E383-4138-9E44-A363712242FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{73482900-37CC-42A7-976B-8CB097593360}.Debug.ActiveCfg = Debug|.NET
+		{73482900-37CC-42A7-976B-8CB097593360}.Debug.Build.0 = Debug|.NET
+		{73482900-37CC-42A7-976B-8CB097593360}.Release.ActiveCfg = Release|.NET
+		{73482900-37CC-42A7-976B-8CB097593360}.Release.Build.0 = Release|.NET
+		{A326B3AE-E383-4138-9E44-A363712242FF}.Debug.ActiveCfg = Debug|Win32
+		{A326B3AE-E383-4138-9E44-A363712242FF}.Debug.Build.0 = Debug|Win32
+		{A326B3AE-E383-4138-9E44-A363712242FF}.Release.ActiveCfg = Release|Win32
+		{A326B3AE-E383-4138-9E44-A363712242FF}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

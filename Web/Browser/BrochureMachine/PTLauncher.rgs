@@ -1,0 +1,26 @@
+HKCR
+{
+	BrochureMachine.PTLauncher.1 = s 'PTLauncher Class'
+	{
+		CLSID = s '{B43D3361-D975-4BE2-87FE-438AB8E74394}'
+	}
+	BrochureMachine.PTLauncher = s 'PTLauncher Class'
+	{
+		CLSID = s '{B43D3361-D975-4BE2-87FE-438AB8E74394}'
+		CurVer = s 'BrochureMachine.PTLauncher.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B43D3361-D975-4BE2-87FE-438AB8E74394} = s 'PTLauncher Class'
+		{
+			ProgID = s 'BrochureMachine.PTLauncher.1'
+			VersionIndependentProgID = s 'BrochureMachine.PTLauncher'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{083432E4-7D93-43A8-96A5-37533C055A8E}'
+		}
+	}
+}

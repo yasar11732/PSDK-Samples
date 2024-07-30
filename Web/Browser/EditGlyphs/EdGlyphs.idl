@@ -1,0 +1,59 @@
+/*
+ * Copyright (c) Microsoft Corporation.  All rights reserved.
+ */
+
+// EdGlyphs.idl : IDL source for EdGlyphs.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EdGlyphs.tlb) and marshalling code.
+#define DISPID_GETHWND   500 
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(5FD6158A-71F6-4F20-B8A9-6EAF5D032D15),
+		dual,
+		helpstring("IBrowserHost Interface"),
+		pointer_default(unique)
+	]
+	interface IBrowserHost : IDispatch
+	{
+		HRESULT Run();
+		HRESULT Stop();
+		[id(DISPID_GETHWND), helpstring("method GetHWND")] HRESULT GetHwnd(long* phwnd);
+	};
+	[
+		object,
+		uuid(CCBFDE40-FE5D-4A3C-880B-47839715E3AC),
+		dual,
+		helpstring("ISnap Interface"),
+		pointer_default(unique)
+	]
+	interface ISnap : IDispatch
+	{
+		HRESULT GetSnapOn(LONG* lIsOn);
+		HRESULT SetSnapOn(LONG lIsOn);
+	};
+
+[
+	uuid(77562D86-6956-4863-AA6D-2646344624EE),
+	version(1.0),
+	helpstring("EdGlyphs 1.0 Type Library")
+]
+library EDGLYPHSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(2A2B21D5-F43B-4EA0-9DFA-1EFE9F9E211A),
+		helpstring("BrowserHost Class")
+	]
+	coclass BrowserHost
+	{
+		[default] interface IBrowserHost;
+	};
+};

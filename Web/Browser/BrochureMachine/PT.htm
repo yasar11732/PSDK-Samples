@@ -1,0 +1,416 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML XMLNS:IE>
+<HEAD>
+<?IMPORT NAMESPACE="IE" IMPLEMENTATION="#default">
+<SCRIPT LANGUAGE="JavaScript">
+var blinkerSet = false;
+var oPageStyleClass = null;
+var oLorStyleClass = null;
+var iBlinkerID = null;
+
+function ResizeApp()
+{
+	ui.style.width = document.body.clientWidth;
+	pagecontainer.style.height = document.body.clientHeight - ui.style.pixelHeight;
+}
+
+function Init()
+{
+	window.dialogWidth = "800px";
+	window.dialogHeight = "600px";
+	zoomcontainer.style.zoom = "75%";
+
+	ResizeApp();
+	oPageStyleClass = FindStyleRule(".pagestyle");
+	oLorStyleClass = FindStyleRule(".lorstyle");
+
+	sTop = dialogArguments.__IE_BrowseDocument.brochureInfo.marginInfo.top;
+	sBottom = dialogArguments.__IE_BrowseDocument.brochureInfo.marginInfo.bottom;
+	sSides = dialogArguments.__IE_BrowseDocument.brochureInfo.marginInfo.sides;
+	sTop = sTop.substring(0, sTop.length - 2);
+	sBottom = sBottom.substring(0, sBottom.length - 2);
+	sSides = sSides.substring(0, sSides.length - 2);
+	iTop = parseFloat(sTop, 10);
+	iBottom = parseFloat(sBottom, 10);
+	iSides = parseFloat(sSides, 10);
+
+	if (IsLandscape())
+	{
+		printer.marginTop = 100 * iTop;
+		printer.marginBottom = 100 * iBottom;
+		printer.marginLeft = 100 * iSides;
+		printer.marginRight = 100 * iSides;
+	}
+	else
+	{
+		printer.marginLeft = 100 * iTop;
+		printer.marginRight = 100 * iBottom;
+		printer.marginTop = 100 * iSides;
+		printer.marginBottom = 100 * iSides;
+	}
+
+	printer.header = "Not Applicable";
+	printer.footer = "Not Applicable";
+
+	CheckPageOrientationAndPaperSize();
+
+	CheckPageSetup();
+	InitClasses();
+}
+
+function IsLandscape()
+{
+	if ((printer.pageWidth == 1100 && printer.pageHeight == 850))
+		return true;
+	else
+		return false;
+}
+
+function CheckPageOrientationAndPaperSize()
+{
+	if (!IsLandscape())
+	{
+		sMessage = "Please switch page setup to landscape mode";
+		// Check paper size
+		if (!(printer.pageWidth == 850 && printer.pageHeight == 1100))
+			sMessage += ", and change paper size to Letter";
+
+		sMessage += "."
+
+		alert(sMessage);
+		printer.showPageSetupDialog();
+	}
+}
+
+function InitLayoutRects()
+{
+	for (i = 1; i <= 6; i++)
+	{
+		document.all("layoutrect" + i).onlayoutcomplete = OverflowChecker;
+		theBody = document.createElement("BODY");
+		theBody.innerHTML = dialogArguments.__IE_BrowseDocument.all("layoutrect" + i).innerHTML;
+
+		FixImageURLs(theBody, dialogArguments.__IE_BrowseDocument.all("layoutrect" + i));
+
+		document.all("layoutrect" + i).contentSrc = theBody.document;
+	}
+
+	theBody = document.createElement("BODY");
+	theBody.innerHTML = dialogArguments.__IE_BrowseDocument.all("watermarkfrontcontainer").innerHTML;
+	FixImageURLs(theBody, dialogArguments.__IE_BrowseDocument.all("watermarkfrontcontainer"));
+	document.all("watermarkfront").contentSrc = theBody.document;
+
+	theBody = document.createElement("BODY");
+	theBody.innerHTML = dialogArguments.__IE_BrowseDocument.all("watermarkbackcontainer").innerHTML;
+	FixImageURLs(theBody, dialogArguments.__IE_BrowseDocument.all("watermarkbackcontainer"));
+	document.all("watermarkback").contentSrc = theBody.document;
+}
+
+function ClearLayoutRects()
+{
+	for (i = 1; i <= 6; i++)
+	{
+		document.all("layoutrect" + i).onlayoutcomplete = null;
+		document.all("layoutrect" + i).contentSrc = "";
+	}
+
+	document.all("watermarkfront").contentSrc = "";
+	document.all("watermarkback").contentSrc = "";
+}
+
+function FixImageURLs(oBody, oSourceDiv)
+{
+	oBodyImgColl = oBody.document.all.tags("IMG");
+	oSourceDivImgColl = oSourceDiv.all.tags("IMG");
+
+	for (j = 0; j < oBodyImgColl.length; j++)
+		oBodyImgColl.item(j).src = oSourceDivImgColl.item(j).src;
+}
+
+function CheckPageSetup()
+{
+	window.clearInterval(iBlinkerID);
+	for (i = 1; i <= 6; i++)
+		document.all("layoutrect" + i).style.borderColor = "white";
+	blinkerSet = false;
+
+	height = 850 - (printer.marginTop + printer.marginBottom);
+	if (height < 1)
+	{
+		alert ("Top margin and/or bottom margin are too big.");
+		return;
+	}
+	if (printer.marginLeft != printer.marginRight)
+	{
+		alert ("Right and Left margins must be the same");
+		return;
+	}
+	width = 1100 - (6 * printer.marginLeft);
+	if (width < .01)
+	{
+		alert("Margins are too big.");
+		return;
+	}
+
+	sMessage = "";
+	if (printer.marginTop < printer.unprintableTop)
+		sMessage += "Top margin is extends into unprintable region.\n";
+	if (printer.marginBottom < printer.unprintableBottom)
+		sMessage += "Bottom margin extends into unprintable region.\n";
+	if (printer.marginLeft < printer.unprintableLeft)
+		sMessage += "Side margins extend into unprintable region.\n";
+	if (sMessage != "") alert(sMessage);
+
+	InitClasses();
+	if (!(printer.pageWidth == 1100 && printer.pageHeight == 850))
+	{
+		alert("Page setup error. Please correct page orientation and/or paper size.");
+		//set blinker on devicerects
+	}
+
+	ClearLayoutRects();
+	InitLayoutRects();
+}
+
+function OverflowChecker()
+{
+	if (event.contentOverflow == true)
+	{
+		event.srcElement.onlayoutcomplete = null;
+
+		message = event.srcElement.id + " has too much stuff in it";
+		alert(message);
+
+		event.srcElement.style.border = "solid red";
+
+		if (blinkerSet == false)
+		{
+			iBlinkerID = window.setInterval("BlinkBackground()", 500);
+			blinkerSet = true;
+		}
+	}
+}
+
+function BlinkBackground()
+{
+	for (i = 1; i <= 6; i++)
+	{
+		oStyle = document.all("layoutrect" + i).style;
+
+		if (oStyle.borderColor == "red")
+		{
+			oStyle.borderColor = "yellow";
+			continue;
+		}
+
+		if (oStyle.borderColor == "yellow") oStyle.borderColor = "red";
+	}
+}
+
+function ShowPrint()
+{
+	if (blinkerSet) alert("Warning: Some columns overflow.");
+
+	if (printer.showPrintDialog())
+		Print();
+}
+
+function Print()
+{
+	numCopies = printer.copies;
+
+	// Print first side
+	printer.startDoc("Brochure Machine, page 1");
+	for (i = 0; i < numCopies; i++)
+		printer.printPage(frontside);
+	printer.stopDoc();
+
+	alert("Front Side Printing. When complete, take pages out of printer, flip, reinsert into printer, and press OK");
+
+	// Print second side
+	printer.startDoc("Brochure Machine, page 2");
+	for (i = 0; i < numCopies; i++)
+		printer.printPage(backside);
+	printer.stopDoc();
+}
+
+function ShowPageSetup()
+{
+	printer.showPageSetupDialog();
+	CheckPageSetup();
+}
+
+function FindStyleRule(styleName)
+{
+	for (i = 0; i < document.styleSheets.length; i++)
+	{
+		for (j = 0; j < document.styleSheets(i).rules.length; j++)
+		{
+			if (document.styleSheets(i).rules(j).selectorText == styleName)
+				return document.styleSheets(i).rules(j);
+		}
+	}
+}
+
+function InitClasses()
+{
+	oPageStyleClass.style.width = printer.pageWidth/100 + "in";
+	oPageStyleClass.style.height = printer.pageHeight/100 + "in";
+	oLorStyleClass.style.marginLeft = printer.marginLeft/100 + "in"
+	oLorStyleClass.style.marginRight = printer.marginRight/100 + "in";
+
+	oLorStyleClass.style.marginTop = printer.marginTop/100 + "in";
+	oLorStyleClass.style.marginBottom = printer.marginBottom/100 + "in";
+	width = Math.floor((1100 - 3 * (printer.marginLeft + printer.marginRight))/3);
+	height = 850 - (printer.marginTop + printer.marginBottom);
+	oLorStyleClass.style.width = width/100 + "in";
+	oLorStyleClass.style.height = height/100 + "in";
+}
+
+function Done()
+{
+	window.close();
+}
+
+function Zoomer(string)
+{
+	if (string == "in")
+	{
+		currZoom = zoomcontainer.style.zoom;
+		currZoom = currZoom.substring(0, currZoom.length - 1);
+		currZoom = parseInt(currZoom, 10);
+		newZoom = currZoom + 1;
+
+		if (newZoom > 10000) return;
+
+		zoomcontainer.style.zoom = newZoom + "%";
+		zoomnumber.value = newZoom;
+	}
+	else if (string == "out")
+	{
+		currZoom = zoomcontainer.style.zoom;
+		currZoom = currZoom.substring(0, currZoom.length - 1);
+		currZoom = parseInt(currZoom, 10);
+		newZoom = currZoom - 1;
+
+		if (newZoom < 1) return;
+
+		zoomcontainer.style.zoom = newZoom + "%";
+		zoomnumber.value = newZoom;
+	}
+	else
+	{
+		if (event.srcElement.id != "zoomnumber") return;
+		if (event.keyCode != 13) return;
+
+		var newZoom = zoomnumber.value;
+		numValue = parseInt(newZoom, 10);
+
+		if (numValue != newZoom) return;
+		if (newZoom > 10000) return;
+		if (newZoom < 1) return;
+
+		zoomcontainer.style.zoom = newZoom + "%";
+	}
+}
+</SCRIPT>
+<STYLE TYPE="text/css">
+.lorstyle
+{
+	width:2.6in;
+	height:8in;
+	margin:.5in;
+}
+.watermarkstyle
+{
+	width:11in;
+	height:8.5in;
+	position:absolute;
+	z-index:-1;
+	overflow-x:hidden;
+	overflow-y:hidden
+}
+.pagestyle
+{
+	width:11in;
+	height:8.5in;
+	background:white;
+}
+.borderstyle {
+	width:11in;
+	height:8.5in;
+	background:black;
+	border-left:1 solid black;
+	border-top:1 solid black;
+	border-right:4 solid black;
+	border-bottom:4 solid black;
+	margin:5px;
+}
+#pagecontainer
+{
+   overflow:auto;
+   width:100%;
+   background-color:#ffffcc;
+   border:'thin threedhighlight inset';
+}
+#zoomcontainer
+{
+	zoom:75%;
+	width:100%;
+	position:relative;
+}
+#ui
+{
+	background-color:#cc9966;
+	height:30;
+}
+</STYLE>
+</HEAD>
+
+<BODY ONLOAD="Init()" ONRESIZE="ResizeApp()" SCROLL="no">
+<IE:TEMPLATEPRINTER ID="printer"/>
+
+<DIV ID="ui">
+	<SPAN STYLE="position:absolute;left:5;top:3">
+	<INPUT TYPE="button" VALUE="Print..." ONCLICK="ShowPrint()"/>
+	<INPUT TYPE="button" VALUE="Page Setup..." ONCLICK="ShowPageSetup()"/>
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;left:250;top:3">
+	<INPUT TYPE="BUTTON" VALUE="Zoom In" ONMOUSEUP="Zoomer('in')">
+	<INPUT ID="zoomnumber" TYPE="TEXT" VALUE="50" SIZE="2" MAXLENGTH="4" ONKEYUP="Zoomer('amount')">
+	<B>%</B>
+	<INPUT TYPE="BUTTON" VALUE="Zoom Out" ONMOUSEUP="Zoomer('out')">
+	</SPAN>
+
+	<SPAN STYLE="position:absolute;right:100;top:3">
+	<INPUT TYPE="button" VALUE="Done" ONCLICK="Done()"/>
+	</SPAN>
+</DIV>
+
+<DIV ID="pagecontainer">
+<DIV ID="zoomcontainer">
+	<DIV CLASS="borderstyle">
+		<IE:DEVICERECT ID="frontside" CLASS="pagestyle" MEDIA="print">
+			<IE:LAYOUTRECT ID="watermarkfront" CLASS="watermarkstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect1" CLASS="lorstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect2" CLASS="lorstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect3" CLASS="lorstyle"/>
+		</IE:DEVICERECT>
+	</DIV>
+
+	<DIV CLASS="borderstyle">
+		<IE:DEVICERECT ID="backside" CLASS="pagestyle" MEDIA="print">
+			<IE:LAYOUTRECT ID="watermarkback" CLASS="watermarkstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect4" CLASS="lorstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect5" CLASS="lorstyle"/>
+			<IE:LAYOUTRECT ID="layoutrect6" CLASS="lorstyle"/>
+		</IE:DEVICERECT>
+	</DIV>
+</DIV>
+</DIV>
+
+<P><HR><font color="black" face="ms sans serif" size="1">&copy;<a href="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" target="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</a></font>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

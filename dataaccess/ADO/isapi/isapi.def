@@ -1,0 +1,12 @@
+LIBRARY	     isapi
+
+DESCRIPTION  'Sample ISAPI'
+
+EXPORTS
+    HttpExtensionProc
+	GetExtensionVersion
+    TerminateExtension
+
+
+
+

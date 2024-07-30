@@ -1,0 +1,65 @@
+================================
+XML -- Server-side XML with ASP Samples
+================================
+Last Updated: April 22, 2002           
+
+
+SUMMARY
+========
+The MSXML component has been designed to also work on the server. 
+The following are some simple examples that demonstrate this. 
+
+Ping -- This demo round-trips an XML document using the XMLHTTP component 
+        to post it to an ASP script on the server. The ASP loads the document, 
+        and simply writes it back to the client. 
+
+Save -- This demo posts an XML document to the server and saves it as a file 
+        on the server. You can then navigate to the saved file directly. 
+
+Shared -- This demo posts an XML document to the server and saves it in 
+          shared Application state so that multiple clients can read and 
+          write the document simultaneously without going into the file 
+          system on the server. 
+
+Simple -- This demo uses an ASP file to transform XML into HTML on the 
+          server, and the HTML returned to the browser. This method of 
+          displaying XML can be extremely useful to those wanting to deliver 
+          data encoded in XML to downlevel clients. 
+  
+
+BROWSER/PLATFORM COMPATIBILITY
+===============================
+To view these demos, all you need is a browser that supports HTML. 
+To run the ASP pages you need to have the Internet Explorer 5 MSXML.DLL 
+or greater installed on your server.   
+
+
+SECURITY Note
+===============
+This demo contains text boxes for user input. You should always validate user input to prevent users from submitting malicious script which could run on the server. For simplicity, no validation code has been included in this demo.
+
+
+SOURCE FILES
+==============
+global.asa
+get.asp
+ping.asp
+put.asp
+save.asp
+simple.asp
+shared.htm
+simple.xml
+simple.xsl
+
+
+SEE ALSO
+=========
+MSDN Online Web Workshop - XML:
+http://msdn.microsoft.com/workshop/xml/index.asp
+
+MSDN Online - XML Developer Center:
+http://msdn.microsoft.com/xml/default.asp
+
+
+==================================
+© Microsoft Corporation 

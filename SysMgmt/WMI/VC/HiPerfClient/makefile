@@ -1,0 +1,63 @@
+#
+# MAKEFILE
+# Sample WINMGMT SamplCli High Performance Client
+#
+# Copyright (c)Microsoft Corporation, All Rights Reserved
+#
+
+TARGET  = 	samplcli.exe
+
+goal:   $(TARGET)
+
+OBJS	= 	$(OBJDIR)\SamplCli.obj\
+		$(OBJDIR)\RefClint.obj
+
+LIBS 	=	msvcrt.lib\
+		kernel32.lib\
+		user32.lib\
+		gdi32.lib\
+		comdlg32.lib\
+		advapi32.lib\
+		shell32.lib\
+		ole32.lib\
+		oleaut32.lib\
+		uuid.lib\
+		wbemuuid.lib\
+		bufferoverflowu.lib
+
+#
+# Compiler and link flags
+#
+
+!ifndef NODEBUG
+
+OBJDIR	= debug
+CFLAGS  = -nologo -c -Od -Z7 -W3 -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS
+LINK    = -nologo -subsystem:console -debug -debugtype:cv /NOD
+
+!else
+
+OBJDIR	= retail
+CFLAGS  = -nologo -c -Od -Z7 -W3 -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS
+LINK    = -nologo -subsystem:console /NOD
+
+!endif #NODEBUG
+
+cc = cl $(CFLAGS)
+
+.cpp{$(OBJDIR)}.obj:
+    if not exist $(OBJDIR) md $(OBJDIR)
+    $(cc) $< -Fo$(OBJDIR)\$(<B).obj
+
+$(TARGET) : $(OBJS) $(DEFFILE)
+    link @<<    
+    $(LINK)
+    -out:$(OBJDIR)\$(TARGET)
+    $(OBJS)
+    $(LIBS) 
+<<
+
+##### Dependencies #####
+
+SamplCli.obj	: SamplCli.cpp
+RefClint.obj	: RefClint.cpp RefClint.h

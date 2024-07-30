@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Microsoft Tablet PC Platform SDK\FactReg\filenames]
+"Absolute path"="C:\\Program Files\\Common Files\\Microsoft Shared\\Ink\\"
+"Relative path"="..\\..\\WinNT"
+"Remote location"="\\\\fileserver\\public\\ReadMe.txt"
+"Wildcards"="D:\\My Picures\\*.GIF"
+"Filename"="Long name with spaces.txt"  
+
+[HKEY_CURRENT_USER\Software\Microsoft\Microsoft Tablet PC Platform SDK\FactReg\wordlist]
+"Name"="John Doe"
+"E-mail"="johndoe123@somemail.com"
+"phone"="(555) 123-4567"
+"Date"="01/23/45" 
+"Image File"="C:\\Documents and Settings\\Default User\\JohnDoe.jpg"
+"Web site"="http://www.johndoe.com"

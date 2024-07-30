@@ -1,0 +1,82 @@
+<!-- 
+ File:		default.htm
+ Description:	ADO 2.7 Sample Application
+		Simple data access Using ADO
+ Copyright:	Copyright (c) 1991-2001 Microsoft Corporation
+-->
+
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE></TITLE>
+
+</HEAD>
+<BODY>
+<LINK REL="STYLESHEET" HREF="..\ADOStyle.css">
+
+<H2>Simple Database Application using ADO</H2>
+
+<H3>Sample Overview</H3>
+<P>The SimpleDB sample application highlights some of the most fundamental operations
+you may perform with an ADO Recordset. Once you have opened SimpleDB.vbp, you may either 
+run the program immediately or browse the source in each of the different forms.   
+Within the sample you will find different forms that highlight different ADO operations. 
+A list of the forms and the operation they are intended to highlight are:</P> 
+
+<P>frmAddEmployee.frm</P>
+This form will allow you to create employee records.  Upon a sucessful add the program will 
+display the new EmployeeID.
+
+<P>frmBrowse.frm   </P>
+This form will allow you to browse the records within the employee table using a form view.
+It should be noted that the Recordset is read-only and the edit boxes have the lock-flag = true to 
+prevent editing the records.  This form is intended to show you how to navigate a recordset by
+using MoveFirst, MoveNext, MoveLast, MovePrevious Recordset methods.
+ 
+<P>frmDbLogin.frm</P>
+This is the intial form you will see.  It's main purpose is to gather information in order
+to call the OpenSql() function with the appropriate credentials. 
+
+<P>frmDeleteEmployee.frm</P>
+As the name of the form gives it away, this form highlights deleting a record from the database.
+
+<P>frmEditEmployee.frm</P>
+This form demonstrates editing an existing record within the database.  One item of interest
+is the way in which the records are fetched.  As the form is loaded the entire set of employee records 
+is fetched.  This is not recommended for real world applications but was simply done in order to show 
+the user how to Filter over a given RecordSet. Once an EmployeeID has been entered the RecordSet will 
+be filtered and it's values displayed accordingly.
+    
+<P>frmListEmployees.frm</P>
+This form displays a grid containing employee records from the database. Interesting features of this 
+form include how the grid control is bound to a recordset and the use of the Recordset Sort propery. 
+
+<P>frmSelectAction.frm</P>
+This form is the main menu for the program and will display the appropriate form based on the user's 
+selection.
+
+<P>basSimpleDb.bas</P>
+This module has the main subroutine which is the starting point for the program. In addition to 
+the program's sub main, the file contains the one utility function for opening connection to a SQL 
+Server database and may be useful in projects of your own.
+
+<H3>Setup</H3>
+<P>Setup this sample by following the steps below:</P>
+
+<OL>
+  <LI>Use Visual Basic 6.0 to open the VB project SimpleDB.vbp. 
+	This project can be found in the Samples\ADO\SimpleDB directory. </LI><BR>
+  
+  <LI>Run the sample.</LI> <BR>
+</OL>
+                
+<H3>System Requirements</H3>
+This application requires the following system components to run.
+<UL>
+<LI>Microsoft Windows NT 4.0 or Windows 2000</LI>
+<LI>Microsoft Visual Basic version 6.0 or newer</LI>
+<LI>SQL Server 6.5 or newer</LI>
+</UL>
+
+</BODY>
+</HTML>

@@ -1,0 +1,38 @@
+LIBRARY RECODLL
+
+EXPORTS
+
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE
+
+; === Reco API
+	CreateRecognizer
+	DestroyRecognizer
+	GetRecoAttributes
+	CreateContext
+	DestroyContext
+	GUIDToIndex
+	IndexToGUID
+	GetResultPropertyList
+	GetPreferredPacketDescription
+	AddStroke
+	GetBestAlternate
+	DestroyAlternate
+	GetBestResultString
+	Process
+	SetGuide
+	GetGuide
+	AdviseInkChange
+	SetCACMode
+	EndInkInput
+	CloneContext
+	ResetContext
+	GetAlternateList
+	GetString
+	GetStrokeRanges
+	GetSegmentAlternateList
+	GetMetrics
+	GetGuideIndex
+	GetConfidenceLevel
+	GetPropertyRanges
+	GetRangePropertyValue

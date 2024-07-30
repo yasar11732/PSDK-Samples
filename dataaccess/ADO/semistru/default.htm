@@ -1,0 +1,52 @@
+<!-- 
+ File:		default.htm
+ Description:	ADO 2.7 Sample Application
+		Semi-Structured data access Using ADO and MSDAIPP.
+ Copyright:	Copyright (c) 1991-2001 Microsoft Corporation
+-->
+
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE></TITLE>
+
+</HEAD>
+<BODY>
+<LINK REL="STYLESHEET" HREF="..\ADOStyle.css">
+
+<H2>Accessing Semi Structured data Using the Microsoft OLE DB Provider for Internet Publishing</H2>
+
+<P>This sample uses the ability of ADO and OLE DB providers which support the OLE DB 2.5 extensions to access data which is semi structured.
+That is data that has structure which does not fit in the model of tables with identically structured rows. In the sample some of the rows (those
+corresponding to directories) are not flat rows but contain a collection of "sub elements". ADO using the ADO record object's GetChildren method exposes
+these collections as recordsets.</P> 
+
+<P>The Microsoft OLE DB Provider for Internet Publishing can be used to access a file system identified by a URL. The provider uses http to access the URL</P>
+
+<P>The sample Visual Basic application uses ADO and the Internet Publishing provider to provide windows explorer like 
+functionality for a remote file system identified by a URL. The ADO record object and its GetChildren method are used to 
+navigate the hierarchical directory structure. </P>
+
+<H3>System Requirements</H3>
+
+<P>This sample assumes that you have a  Microsoft Windows NT 4 or Windows2000 
+	Server system with Visual Basic 6.0 installed.
+</P>
+
+<H3>Setup</H3>
+<P>Setup this sample by following the steps below:</P>
+
+<OL>
+  <LI>Use Visual Basic 6.0 to open the VB project SemiStru.vbp. This project can be found in the ADOSamp\semistru 
+  directory. <BR>       
+   
+  <LI>Run the sample. <BR>         
+                
+  <LI>The sample will work against any web site/URL for which directory browsing is enabled. To enable directory
+  browsing for the ADOSamp site. Open the IIS administration tool (control panel->administrative tools->Internet Services Manager). 
+  Locate the ADOSamp directory and right click on it. Then select properties. 
+  In the properties window select the virtual directory tab. Check the box labeled directory browsing. Click on OK.</LI></OL>
+
+
+</BODY>
+</HTML>

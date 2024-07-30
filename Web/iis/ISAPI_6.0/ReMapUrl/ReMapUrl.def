@@ -1,0 +1,6 @@
+LIBRARY ReMapUrl
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+

@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoClaims", "AutoClaims.csproj", "{E33B5A13-5C2E-42FF-BF4B-B658599B080C}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{E33B5A13-5C2E-42FF-BF4B-B658599B080C}.Debug.ActiveCfg = Debug|.NET
+		{E33B5A13-5C2E-42FF-BF4B-B658599B080C}.Debug.Build.0 = Debug|.NET
+		{E33B5A13-5C2E-42FF-BF4B-B658599B080C}.Release.ActiveCfg = Release|.NET
+		{E33B5A13-5C2E-42FF-BF4B-B658599B080C}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

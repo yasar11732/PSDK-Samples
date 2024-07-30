@@ -1,0 +1,13 @@
+<Schema xmlns="urn:schemas-microsoft-com:xml-data"
+        xmlns:dt="urn:schemas-microsoft-com:datatypes">
+  <AttributeType name="id" dt:type="id"/>
+  <ElementType name="teacher" content="eltOnly">
+    <attribute type="id"/>
+  </ElementType>
+  <ElementType name="class" content="eltOnly">
+    <attribute type="id"/>
+  </ElementType>
+  <ElementType name="student" content="eltOnly">
+    <attribute type="id"/>
+  </ElementType>
+</Schema>

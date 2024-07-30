@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE root SYSTEM "sample.dtd" [
+<!ELEMENT root (description,dsig)>
+<!ATTLIST root photoid ENTITY #REQUIRED>
+<!NOTATION gif SYSTEM "http://www.compuserve.com">
+<!ENTITY chris SYSTEM "chris.gif" NDATA gif>
+]>
+<root photoid="chris">
+    <!-- this tests the DOM interface -->
+    <description>
+        <?foo is a PI node?>
+        This is a XML DOM document...
+        <foo>&bar;</foo>
+    </description>
+    <dsig value="172631"/>
+</root>
+
